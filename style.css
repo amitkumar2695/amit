@@ -1,0 +1,47 @@
+body {
+  font-family: 'Georgia', serif;
+  margin: 0;
+  background: #f9f9f9;
+  color: #333;
+}
+header.hero {
+  background: #003366;
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+main { max-width: 1000px; margin: auto; padding: 2rem; }
+footer { background-color: #eee; text-align: center; padding: 1rem; }
+.profile-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: block;
+  margin: 1rem auto;
+}
+.card-container { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+.card { background: white; padding: 1rem; width: 300px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+
+nav a {
+  position: relative;
+  margin: 0 10px;
+  color: #ffcc00;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+nav a::after {
+  content: "";
+  display: block;
+  height: 2px;
+  background: #ffffff;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: left;
+}
+nav a:hover {
+  color: #ffffff;
+}
+nav a:hover::after {
+  transform: scaleX(1);
+}
