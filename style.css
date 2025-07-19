@@ -12,6 +12,17 @@ header {
     padding: 2rem 1rem;
 }
 nav a {
+  position: relative;
+  margin: 0 10px;
+  color: #ffcc00;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+nav a:hover {
+  color: #ffffff;
+}
+nav a {
     margin: 0 10px;
     color: #ffcc00;
     text-decoration: none;
