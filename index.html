@@ -1,146 +1,156 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <title>Your Name</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Academic Profile</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <div class="container">
 
+<!-- HEADER -->
 <div class="header">
+  <img src="profile.jpg" class="profile">
 
-<img src="Amit_Photo.jpg" class="profile">
+  <div class="intro">
+    <h1>Your Name</h1>
+    <h3>Assistant Professor Candidate</h3>
+    <p>Responsive Hydrogels | Soft Robotics | Biomaterials | Environmental Sensors</p>
+  </div>
+</div>
 
-<div>
+<!-- TABS -->
+<div class="tabs">
+  <button class="tablink active" onclick="openTab(event,'about')">About Me</button>
+  <button class="tablink" onclick="openTab(event,'research')">Research Theme</button>
+  <button class="tablink" onclick="openTab(event,'publications')">Publications</button>
+  <button class="tablink" onclick="openTab(event,'awards')">Awards & Grants</button>
+  <button class="tablink" onclick="openTab(event,'position')">Position of Responsibility</button>
+  <button class="tablink" onclick="openTab(event,'referees')">Referees</button>
+</div>
 
-<h1>Your Name</h1>
+<!-- ABOUT -->
+<div id="about" class="tabcontent active">
 
-<h3>Assistant Professor Candidate</h3>
+  <h2>Short Biography</h2>
+  <p>
+  I am a researcher working on responsive hydrogels, soft robotics, and biomaterials for environmental and biomedical applications.
+  </p>
 
-<p>
-Department of XXXXX
-</p>
+  <h2>Skills</h2>
+  <ul>
+    <li>Hydrogel synthesis & characterization</li>
+    <li>Soft robotics design</li>
+    <li>Microfabrication & biomaterials</li>
+    <li>Sensor development</li>
+  </ul>
 
-<p>
-Email:
-your.email@university.edu
-</p>
+  <h2>Education</h2>
+  <ul>
+    <li>PhD – IIT Madras</li>
+    <li>M.Tech – Biotechnology</li>
+    <li>B.Tech – Biotechnology</li>
+  </ul>
 
-<p>
-<a href="#">Google Scholar</a> |
-<a href="#">ORCID</a> |
-<a href="cv.pdf">CV</a>
-</p>
+  <h2>Research Experience</h2>
+  <ul>
+    <li>IIT Madras – Doctoral Research (Biomaterials & Hydrogels)</li>
+    <li>Research Assistant – Soft Robotics Lab</li>
+  </ul>
+
+</div>
+
+<!-- RESEARCH -->
+<div id="research" class="tabcontent">
+
+  <h2>Research Themes</h2>
+
+  <div class="card">
+    <h3>Stimuli-Responsive Systems</h3>
+    <p>pH-responsive and solvent-adaptive hydrogels for targeted drug delivery.</p>
+  </div>
+
+  <div class="card">
+    <h3>Biomaterials Design</h3>
+    <p>Engineering dynamic biomaterials for medical applications including anti-fouling and vascular graft systems.</p>
+  </div>
+
+  <div class="card">
+    <h3>Biomimetics and Soft Robotics</h3>
+    <p>Nature-inspired actuation systems for biointegrated devices and soft robotics.</p>
+  </div>
+
+  <div class="card">
+    <h3>Advanced Manufacturing</h3>
+    <p>Developing multifunctional materials using 3D and 4D printing techniques.</p>
+  </div>
+
+</div>
+
+<!-- PUBLICATIONS -->
+<div id="publications" class="tabcontent">
+
+  <h2>Publications</h2>
+
+  <ol>
+    <li>Your Name et al., Journal Name, Year</li>
+    <li>Your Name et al., Journal Name, Year</li>
+    <li>Your Name et al., Journal Name, Year</li>
+  </ol>
+
+</div>
+
+<!-- AWARDS -->
+<div id="awards" class="tabcontent">
+
+  <h2>Awards & Grants</h2>
+
+  <ul>
+    <li>MARIE CURIE POSTDOCTORAL FELLOWSHIP – SEAL OF EXCELLENCE 2026</li>
+    <li>RESEARCH EXCELLENCE AWARD – IIT MADRAS 2024</li>
+    <li>INSTITUTE RESEARCH AWARD – IIT MADRAS 2024</li>
+    <li>FIRST PRIZE – SCI-TECH EXPOSIUM IIT MADRAS 2024</li>
+    <li>GATE – INDIA 2017</li>
+  </ul>
+
+</div>
+
+<!-- POSITION -->
+<div id="position" class="tabcontent">
+
+  <h2>Workshop Organizer</h2>
+  <p>
+  IEEE RAS ROBOSOFT 2026, Kanazawa, Japan – Functional and Untethered Soft Machines
+  </p>
+
+  <h2>Teaching Experience</h2>
+
+  <ul>
+    <li>TA – Genetic Engineering Lab, IIT Madras</li>
+    <li>TA – Microbiology Lab, IIT Madras</li>
+  </ul>
+
+</div>
+
+<!-- REFEREES -->
+<div id="referees" class="tabcontent">
+
+  <h2>Referees</h2>
+
+  <ul>
+    <li>Prof. Barbara Mazzolai – IIT Italy – barbara.mazzolai@iit.it</li>
+    <li>Prof. Nitish Mahapatra – IIT Madras – nmahapatra@iitm.ac.in</li>
+    <li>Prof. Pijush Ghosh – IIT Madras – pijush@iitm.ac.in</li>
+    <li>Dr. Nidhi Gupta – India – nidhiophthal@gmail.com</li>
+  </ul>
 
 </div>
 
 </div>
 
-<hr>
-
-<h2>Research Summary</h2>
-
-<p>
-I develop responsive hydrogel systems, biodegradable electronics,
-and soft robotic sensing platforms for environmental monitoring and
-precision agriculture.
-</p>
-
-<h2>Expertise</h2>
-
-<div class="tags">
-
-<span>Hydrogels</span>
-<span>Soft Robotics</span>
-<span>Environmental Sensors</span>
-<span>Flexible Electronics</span>
-<span>Soil Monitoring</span>
-
-</div>
-
-<h2>Professional Experience</h2>
-
-<ul>
-
-<li>2024–Present: Postdoctoral Researcher</li>
-
-<li>2020–2024: PhD Researcher</li>
-
-<li>2018–2020: Research Assistant</li>
-
-</ul>
-
-<h2>Research Themes</h2>
-
-<h3>Responsive Hydrogels</h3>
-
-<p>
-Stimuli-responsive hydrogels for pH, moisture, and temperature sensing.
-</p>
-
-<h3>Soft Robotics</h3>
-
-<p>
-Bioinspired systems driven by hydrogel swelling and shrinkage.
-</p>
-
-<h3>Environmental Sensing</h3>
-
-<p>
-Biodegradable soil monitoring systems for precision agriculture.
-</p>
-
-<h2>Selected Publications</h2>
-
-<ol>
-
-<li>
-Author, Author, Your Name.
-Advanced Functional Materials, 2025.
-</li>
-
-<li>
-Author, Your Name.
-ACS Applied Materials & Interfaces, 2024.
-</li>
-
-</ol>
-
-<p>
-<a href="publications.html">
-View Full Publication List
-</a>
-</p>
-
-<h2>Software & Data</h2>
-
-<ul>
-
-<li>Hydrogel Sensor Dataset</li>
-
-<li>Soil Monitoring Platform</li>
-
-<li>Open-source Sensor Analysis Tools</li>
-
-</ul>
-
-<h2>Teaching</h2>
-
-<ul>
-
-<li>Smart Materials</li>
-
-<li>Soft Robotics</li>
-
-<li>Sensors and Actuators</li>
-
-</ul>
-
-</div>
-
+<script src="script.js"></script>
 </body>
-
 </html>
