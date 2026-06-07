@@ -25,6 +25,11 @@ body {
   border-radius: 10px;
 }
 
+.lab {
+  width: 360px;
+  border-radius: 10px;
+}
+
 /* TABS */
 .tabs {
   display: flex;
