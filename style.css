@@ -38,68 +38,26 @@ body {
   background: #003366;
 }
 
-.tablink {
-  flex: 1;
-  padding: 12px;
-  background: #003366;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.tablink:hover {
-  background: #0055aa;
-}
-
-.tablink.active {
-  background: #0077cc;
-}
-
-/* TAB CONTENT */
-.tabcontent {
-  display: none;
-  padding: 20px;
-}
-
-.tabcontent.active {
-  display: block;
-}
-
-/* CARDS */
-.card {
-  background: #eef5ff;
-  padding: 15px;
-  margin-bottom: 10px;
-  border-left: 4px solid #0077cc;
-}
-
-
 #education tr,
 #Research\ Experience tr{
 
-    border-left: 6px solid #8B0000 !important;
+background:rgba(255,255,255,0.08);
 
-    background:white;
+backdrop-filter:blur(10px);
 
-    box-shadow:none;
+border:1px solid rgba(255,255,255,0.15);
 
-    border-radius:0;
+border-radius:20px;
 
-    transition:0.3s;
-}
-
-#education tr:hover,
-#Research\ Experience tr:hover{
-    background:#fafafa;
+box-shadow:none;
 }
 
 #education td,
 #Research\ Experience td{
-    padding:30px !important;
+padding:30px !important;
 }
 
-#education h3,
-#Research\ Experience h3{
-    color:#111;
-    letter-spacing:0.5px;
+#education img,
+#Research\ Experience img{
+filter:drop-shadow(0 0 10px rgba(0,0,0,.2));
 }
