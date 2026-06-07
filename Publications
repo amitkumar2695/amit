@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Publications</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>Publications</h1>
+
+<h2>Journal Articles</h2>
+
+<ol>
+
+<li>
+Your Name et al.
+Title.
+Advanced Functional Materials.
+2025.
+</li>
+
+<li>
+Your Name et al.
+Title.
+ACS Applied Materials & Interfaces.
+2024.
+</li>
+
+</ol>
+
+<a href="index.html">
+Back to Home
+</a>
+
+</body>
+</html>
