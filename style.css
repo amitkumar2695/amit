@@ -1,11 +1,36 @@
 body {
-  max-width: 900px;
-  margin: auto;
-  padding: 40px;
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
+    font-family: Arial, sans-serif;
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+    line-height: 1.7;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.profile {
+    width: 220px;
+    border-radius: 8px;
+}
+
+.tags span {
+    background: #eeeeee;
+    padding: 8px 12px;
+    margin: 5px;
+    display: inline-block;
+    border-radius: 20px;
 }
 
 h1 {
-  color: #003366;
+    margin-bottom: 5px;
+}
+
+h2 {
+    margin-top: 40px;
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 5px;
 }
