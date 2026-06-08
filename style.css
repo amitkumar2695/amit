@@ -37,27 +37,3 @@ body {
   margin-top: 20px;
   background: #003366;
 }
-
-#education tr,
-#Research\ Experience tr{
-
-background:rgba(255,255,255,0.08);
-
-backdrop-filter:blur(10px);
-
-border:1px solid rgba(255,255,255,0.15);
-
-border-radius:20px;
-
-box-shadow:none;
-}
-
-#education td,
-#Research\ Experience td{
-padding:30px !important;
-}
-
-#education img,
-#Research\ Experience img{
-filter:drop-shadow(0 0 10px rgba(0,0,0,.2));
-}
