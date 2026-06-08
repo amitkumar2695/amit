@@ -37,3 +37,38 @@ body {
   margin-top: 20px;
   background: #003366;
 }
+
+.tablink {
+  flex: 1;
+  padding: 12px;
+  background: #003366;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.tablink:hover {
+  background: #0055aa;
+}
+
+.tablink.active {
+  background: #0077cc;
+}
+
+/* TAB CONTENT */
+.tabcontent {
+  display: none;
+  padding: 20px;
+}
+
+.tabcontent.active {
+  display: block;
+}
+
+/* CARDS */
+.card {
+  background: #eef5ff;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-left: 4px solid #0077cc;
+}
