@@ -167,40 +167,55 @@ body {
     }
 }
 
-/* ================================= */
-/* Publication Cards */
-/* ================================= */
+/* ==========================================
+   PUBLICATION SECTION
+========================================== */
+
+.pub-page-title {
+
+    font-size: 42px;
+
+    font-weight: 300;
+
+    margin-bottom: 40px;
+
+    color: #222;
+}
+
+/* Publication card */
 
 .publication-card {
 
     display: flex;
 
+    align-items: flex-start;
+
     gap: 30px;
 
-    margin-bottom: 35px;
+    margin-bottom: 40px;
 
-    padding-bottom: 25px;
+    padding-bottom: 30px;
 
-    border-bottom: 1px solid #e5e5e5;
-
-    align-items: flex-start;
+    border-bottom: 1px solid #e6e6e6;
 }
+
+/* Image */
 
 .publication-image {
 
-    flex: 0 0 260px;
+    flex: 0 0 250px;
 }
 
 .publication-image img {
 
-    width: 260px;
+    width: 250px;
 
-    height: auto;
-
-    border-radius: 4px;
+    border-radius: 6px;
 
     display: block;
 }
+
+/* Content */
 
 .publication-content {
 
@@ -211,13 +226,15 @@ body {
 
     margin-top: 0;
 
-    color: #0066cc;
+    margin-bottom: 12px;
 
     font-size: 30px;
 
-    font-weight: 500;
-
     line-height: 1.4;
+
+    color: #1976d2;
+
+    font-weight: 500;
 }
 
 .authors {
@@ -226,34 +243,41 @@ body {
 
     color: #333;
 
-    margin-top: 12px;
-
     margin-bottom: 8px;
 }
 
 .journal {
 
-    font-style: italic;
-
     font-size: 24px;
 
+    font-style: italic;
+
     color: #444;
+
+    margin-bottom: 10px;
+}
+
+.impact {
+
+    font-size: 20px;
+
+    color: #666;
 
     margin-bottom: 20px;
 }
 
+/* Links */
+
 .publication-links {
 
-    margin-top: 15px;
-
-    font-size: 24px;
+    font-size: 22px;
 }
 
 .publication-links a {
 
-    color: #1a73e8;
-
     text-decoration: none;
+
+    color: #1976d2;
 
     margin-right: 8px;
 }
@@ -262,6 +286,8 @@ body {
 
     text-decoration: underline;
 }
+
+/* Mobile */
 
 @media screen and (max-width: 900px) {
 
@@ -278,5 +304,22 @@ body {
     .publication-image img {
 
         width: 100%;
+        max-width: 450px;
+    }
+
+    .publication-content h3 {
+
+        font-size: 24px;
+    }
+
+    .authors,
+    .journal {
+
+        font-size: 18px;
+    }
+
+    .publication-links {
+
+        font-size: 18px;
     }
 }
