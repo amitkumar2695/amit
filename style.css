@@ -166,3 +166,195 @@ body {
         width: 95%;
     }
 }
+
+/* ================================= */
+/* Publication Cards */
+/* ================================= */
+
+.publication-card {
+
+    display: flex;
+
+    gap: 30px;
+
+    margin-bottom: 35px;
+
+    padding-bottom: 25px;
+
+    border-bottom: 1px solid #e5e5e5;
+
+    align-items: flex-start;
+}
+
+.publication-image {
+
+    flex: 0 0 260px;
+}
+
+.publication-image img {
+
+    width: 260px;
+
+    height: auto;
+
+    border-radius: 4px;
+
+    display: block;
+}
+
+.publication-content {
+
+    flex: 1;
+}
+
+.publication-content h3 {
+
+    margin-top: 0;
+
+    color: #0066cc;
+
+    font-size: 30px;
+
+    font-weight: 500;
+
+    line-height: 1.4;
+}
+
+.authors {
+
+    font-size: 24px;
+
+    color: #333;
+
+    margin-top: 12px;
+
+    margin-bottom: 8px;
+}
+
+.journal {
+
+    font-style: italic;
+
+    font-size: 24px;
+
+    color: #444;
+
+    margin-bottom: 20px;
+}
+
+.publication-links {
+
+    margin-top: 15px;
+
+    font-size: 24px;
+}
+
+.publication-links a {
+
+    color: #1a73e8;
+
+    text-decoration: none;
+
+    margin-right: 8px;
+}
+
+.publication-links a:hover {
+
+    text-decoration: underline;
+}
+
+/* ================================= */
+/* Publication Cards */
+/* ================================= */
+
+.publication-card {
+
+    display: flex;
+
+    gap: 30px;
+
+    margin-bottom: 35px;
+
+    padding-bottom: 25px;
+
+    border-bottom: 1px solid #e5e5e5;
+
+    align-items: flex-start;
+}
+
+.publication-image {
+
+    flex: 0 0 260px;
+}
+
+.publication-image img {
+
+    width: 260px;
+
+    height: auto;
+
+    border-radius: 4px;
+
+    display: block;
+}
+
+.publication-content {
+
+    flex: 1;
+}
+
+.publication-content h3 {
+
+    margin-top: 0;
+
+    color: #0066cc;
+
+    font-size: 30px;
+
+    font-weight: 500;
+
+    line-height: 1.4;
+}
+
+.authors {
+
+    font-size: 24px;
+
+    color: #333;
+
+    margin-top: 12px;
+
+    margin-bottom: 8px;
+}
+
+.journal {
+
+    font-style: italic;
+
+    font-size: 24px;
+
+    color: #444;
+
+    margin-bottom: 20px;
+}
+
+.publication-links {
+
+    margin-top: 15px;
+
+    font-size: 24px;
+}
+
+.publication-links a {
+
+    color: #1a73e8;
+
+    text-decoration: none;
+
+    margin-right: 8px;
+}
+
+.publication-links a:hover {
+
+    text-decoration: underline;
+}
