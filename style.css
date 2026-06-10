@@ -262,3 +262,21 @@ body {
 
     text-decoration: underline;
 }
+
+@media screen and (max-width: 900px) {
+
+    .publication-card {
+
+        flex-direction: column;
+    }
+
+    .publication-image {
+
+        flex: none;
+    }
+
+    .publication-image img {
+
+        width: 100%;
+    }
+}
