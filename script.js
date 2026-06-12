@@ -40,3 +40,29 @@ function openPositionTab(evt, tabName) {
 
     evt.currentTarget.classList.add("active");
 }
+
+function openTalkTab(evt, tabName) {
+
+    let i;
+
+    let tabcontent =
+    document.getElementsByClassName("talk-subtab");
+
+    for(i = 0; i < tabcontent.length; i++) {
+
+        tabcontent[i].classList.remove("active");
+    }
+
+    let tablinks =
+    document.querySelectorAll("#talks .subtab-btn");
+
+    for(i = 0; i < tablinks.length; i++) {
+
+        tablinks[i].classList.remove("active");
+    }
+
+    document.getElementById(tabName)
+    .classList.add("active");
+
+    evt.currentTarget.classList.add("active");
+}
