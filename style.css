@@ -463,3 +463,146 @@ POSITION OF RESPONSIBILITY
         width: 100%;
     }
 }
+
+/* =======================================
+   TALKS & PRESENTATIONS
+======================================= */
+
+.talk-subtab {
+
+    display: none;
+}
+
+.talk-subtab.active {
+
+    display: block;
+}
+
+/* Presentation Card */
+
+.presentation-card {
+
+    display: flex;
+
+    gap: 25px;
+
+    margin-bottom: 35px;
+
+    padding-bottom: 25px;
+
+    border-bottom: 1px solid #e5e5e5;
+
+    align-items: flex-start;
+}
+
+/* Logo */
+
+.presentation-logo {
+
+    flex: 0 0 150px;
+}
+
+.presentation-logo img {
+
+    width: 150px;
+
+    height: auto;
+
+    border-radius: 6px;
+}
+
+/* Content */
+
+.presentation-content {
+
+    flex: 1;
+}
+
+.presentation-content h3 {
+
+    margin-top: 0;
+
+    color: #1976d2;
+
+    font-size: 24px;
+
+    line-height: 1.5;
+
+    font-weight: 500;
+}
+
+.authors {
+
+    font-size: 18px;
+
+    color: #333;
+
+    margin-bottom: 8px;
+}
+
+.conference {
+
+    font-style: italic;
+
+    color: #444;
+
+    font-size: 18px;
+
+    margin-bottom: 5px;
+}
+
+.location {
+
+    color: #666;
+
+    font-size: 16px;
+}
+
+/* Abstract Button */
+
+.abstract-link {
+
+    margin-left: 15px;
+
+    font-size: 15px;
+
+    text-decoration: none;
+
+    background: #003366;
+
+    color: white;
+
+    padding: 5px 10px;
+
+    border-radius: 4px;
+}
+
+.abstract-link:hover {
+
+    background: #1976d2;
+}
+
+/* Mobile */
+
+@media screen and (max-width:900px) {
+
+    .presentation-card {
+
+        flex-direction: column;
+    }
+
+    .presentation-logo {
+
+        flex: none;
+    }
+
+    .presentation-logo img {
+
+        width: 120px;
+    }
+
+    .presentation-content h3 {
+
+        font-size: 20px;
+    }
+}
