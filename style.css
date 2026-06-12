@@ -323,3 +323,143 @@ body {
         font-size: 18px;
     }
 }
+
+/* ==========================================
+POSITION OF RESPONSIBILITY
+========================================== */
+
+.subtabs {
+
+    margin-top: 25px;
+    margin-bottom: 35px;
+}
+
+.subtab-btn {
+
+    padding: 12px 30px;
+    margin-right: 10px;
+
+    background: #003366;
+    color: white;
+
+    border: none;
+    cursor: pointer;
+
+    border-radius: 4px;
+}
+
+.subtab-btn.active {
+
+    background: #1976d2;
+}
+
+.position-subtab {
+
+    display: none;
+}
+
+.position-subtab.active {
+
+    display: block;
+}
+
+.activity-block {
+
+    margin-bottom: 35px;
+}
+
+.activity-block h3 {
+
+    color: #003366;
+}
+
+.activity-block p {
+
+    line-height: 1.8;
+    color: #444;
+}
+
+/* ========================= */
+
+.organization-card {
+
+    display: flex;
+
+    gap: 25px;
+
+    margin-bottom: 40px;
+
+    padding-bottom: 30px;
+
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.org-image img {
+
+    width: 280px;
+
+    border-radius: 6px;
+}
+
+.org-text {
+
+    flex: 1;
+}
+
+.org-text p {
+
+    line-height: 1.8;
+}
+
+/* ========================= */
+
+.sports-card {
+
+    margin-top: 25px;
+}
+
+.sports-gallery {
+
+    display: flex;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+.sports-gallery img {
+
+    width: 31%;
+
+    border-radius: 6px;
+}
+
+.sports-text p {
+
+    line-height: 1.8;
+}
+
+/* ========================= */
+
+@media screen and (max-width:900px) {
+
+    .organization-card {
+
+        flex-direction: column;
+    }
+
+    .org-image img {
+
+        width: 100%;
+    }
+
+    .sports-gallery {
+
+        flex-direction: column;
+    }
+
+    .sports-gallery img {
+
+        width: 100%;
+    }
+}
