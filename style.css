@@ -1,7 +1,17 @@
-body {
-  font-family: Arial;
-  margin: 0;
-  background: #f5f5f5;
+body{
+    font-family: "Segoe UI", Arial, sans-serif;
+    background:#f5f7fa;
+    color:#444;
+}
+
+.section-title,
+.pub-page-title,
+.research-page-title{
+    font-size:36px;
+    font-weight:600;
+    color:#003366;
+    text-align:center;
+    margin-bottom:35px;
 }
 
 .container {
