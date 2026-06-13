@@ -49,6 +49,15 @@ body{
   border-radius: 0px;
 }
 
+.about-intro{
+    max-width:900px;
+    margin:auto;
+    text-align:center;
+    font-size:18px;
+    line-height:1.9;
+    color:#444;
+}
+
 /* TABS */
 .tabs {
   display: flex;
