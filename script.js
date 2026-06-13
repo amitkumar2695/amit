@@ -66,3 +66,27 @@ function openTalkTab(evt, tabName) {
 
     evt.currentTarget.classList.add("active");
 }
+
+function openAwardTab(evt, tabName) {
+
+    let i;
+
+    let tabs =
+    document.getElementsByClassName("award-subtab");
+
+    for(i = 0; i < tabs.length; i++) {
+        tabs[i].classList.remove("active");
+    }
+
+    let buttons =
+    document.querySelectorAll("#awards .subtab-btn");
+
+    for(i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove("active");
+    }
+
+    document.getElementById(tabName)
+    .classList.add("active");
+
+    evt.currentTarget.classList.add("active");
+}
