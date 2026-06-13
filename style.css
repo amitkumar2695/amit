@@ -92,6 +92,27 @@ body{
   border-left: 4px solid #0077cc;
 }
 
+.education-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 20px;
+}
+
+.education-table tr {
+
+    background: white;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+
+    border-left: 5px solid #003366;
+
+    border-radius: 8px;
+}
+
+.education-table td {
+
+    padding: 25px;
+}
 /* ============================= */
 /* RESEARCH PAGE */
 /* ============================= */
