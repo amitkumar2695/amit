@@ -23,15 +23,13 @@ function openPositionTab(evt, tabName) {
     document.getElementsByClassName("position-subtab");
 
     for(i=0;i<tabcontent.length;i++) {
-
         tabcontent[i].classList.remove("active");
     }
 
     let tablinks =
-    document.getElementsByClassName("subtab-btn");
+    document.querySelectorAll("#position .subtab-btn");
 
     for(i=0;i<tablinks.length;i++) {
-
         tablinks[i].classList.remove("active");
     }
 
