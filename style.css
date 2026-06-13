@@ -606,3 +606,90 @@ POSITION OF RESPONSIBILITY
         font-size: 20px;
     }
 }
+
+/* ==========================================
+AWARDS & GRANTS
+========================================== */
+
+.award-subtab {
+    display: none;
+}
+
+.award-subtab.active {
+    display: block;
+}
+
+.award-card {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.award-certificate {
+    flex: 0 0 250px;
+}
+
+.award-certificate img {
+    width: 250px;
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+}
+
+.award-content {
+    flex: 1;
+}
+
+.award-content h3 {
+    color: #003366;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.award-content p {
+    line-height: 1.8;
+    color: #444;
+}
+
+/* SPORTS SECTION */
+
+.sports-award-card {
+    margin-bottom: 50px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.sports-gallery {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.sports-gallery img {
+    width: 31%;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+/* MOBILE */
+
+@media screen and (max-width: 900px) {
+
+    .award-card {
+        flex-direction: column;
+    }
+
+    .award-certificate img {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .sports-gallery {
+        flex-direction: column;
+    }
+
+    .sports-gallery img {
+        width: 100%;
+    }
+}
