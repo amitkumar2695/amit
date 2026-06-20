@@ -142,7 +142,7 @@ img {
 }
 
 .hero {
-  min-height: calc(100vh - 74px);
+  min-height: calc(100vh - 90px);
   display: grid;
   align-items: center;
 }
