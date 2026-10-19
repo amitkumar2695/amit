@@ -1,11 +1,9 @@
-/* Portfolio enhancements: cursor-driven water microrobot and research highlights.
-   Works with the existing site's script.js without rewriting its filters or lightbox.
-   Set videoSrc below after uploading your own authorized MP4/WebM. */
+/* Portfolio enhancements: sitewide microrobot and publication research highlights.
+   Research GIFs load automatically from gifs/Paper1.gif through gifs/Paper8.gif.
+   Missing GIFs use clearly identified animated graphical-abstract previews. */
 (() => {
   "use strict";
   const settings = {
-    videoSrc: "",  // e.g. "media/biofilm-actuator-demo.mp4"
-    videoPoster: "Paper8.png",
     doi: "https://doi.org/10.1002/adhm.71804"
   };
   const studies = {
@@ -65,20 +63,71 @@
     wrap.append(chips);
     parent.append(wrap);
   }
+  function gifPath(poster) {
+    // The eight existing graphical abstract images are Paper1.png ... Paper8.png.
+    const match = String(poster || "").match(/(?:^|\/)(Paper[1-8])\.(?:png|jpe?g|webp)$/i);
+    return match ? "gifs/" + match[1] + ".gif" : "";
+  }
+  function makeGifCard(poster, label) {
+    const card = node("div", "upgrade-media-card upgrade-gif-card");
+    card.append(node("h4", "upgrade-subhead", "Research GIF"));
+    const stage = node("div", "upgrade-gif-stage");
+    const preview = node("img", "upgrade-gif-preview");
+    preview.src = poster;
+    preview.alt = "Illustrative animated preview of the existing graphical abstract";
+    preview.loading = "lazy";
+    stage.append(preview);
+    const status = node("p", "upgrade-media-status", "Animated graphical abstract preview");
+    const gifSrc = gifPath(poster);
+    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (gifSrc && !reducedMotion) {
+      const gif = node("img", "upgrade-gif-image");
+      gif.alt = label || "Research animation for this publication";
+      gif.loading = "lazy";
+      gif.decoding = "async";
+      gif.addEventListener("load", () => {
+        gif.classList.add("is-ready");
+        preview.hidden = true;
+        status.textContent = "Research GIF";
+      }, {once:true});
+      gif.addEventListener("error", () => {
+        gif.remove();
+        status.textContent = "Animated graphical abstract preview";
+      }, {once:true});
+      gif.src = gifSrc;
+      stage.append(gif);
+    } else if (reducedMotion) {
+      status.textContent = "Static preview (reduced-motion setting)";
+    }
+    card.append(stage, status);
+    return card;
+  }
   function enhancePublications() {
     document.querySelectorAll("#publications .publication-list .publication-item").forEach(article => {
-      if (article.querySelector(".upgrade-insights")) return;
       const main = article.querySelector(".publication-main");
       const paperLink = main && main.querySelector('a[href*="doi.org/"]');
       if (!paperLink) return;
       let doi;
       try { doi = new URL(paperLink.getAttribute("href").trim(), location.href).pathname.replace(/^\//, "").toLowerCase(); }
       catch { return; }
-      if (studies[doi]) addInsights(main, studies[doi]);
+      if (studies[doi] && !article.querySelector(".upgrade-insights")) addInsights(main, studies[doi]);
+      const media = article.querySelector(".publication-visuals");
+      const figure = media && media.querySelector(".pub-figure");
+      if (!media || !figure || media.classList.contains("upgrade-paper-media")) return;
+      const poster = figure.querySelector("img")?.getAttribute("src");
+      if (!poster) return;
+      const graphicCard = node("div", "upgrade-media-card upgrade-graphic-card");
+      graphicCard.append(node("h4", "upgrade-subhead", "Graphical abstract"));
+      // Reparent the existing figure: its keyboard-accessible lightbox still works.
+      figure.before(graphicCard);
+      graphicCard.append(figure);
+      const paperTitle = main.querySelector("h3")?.textContent || "this publication";
+      media.append(makeGifCard(poster, "Research GIF for " + paperTitle));
+      media.classList.add("upgrade-paper-media");
     });
   }
   function makeGraphicCard() {
-    const card = node("div", "upgrade-media-card");
+    const card = node("div", "upgrade-media-card upgrade-graphic-card");
     card.append(node("h4", "upgrade-subhead", "Graphical abstract"));
     const anchor = makeLink("Paper8.png", "", "upgrade-image-link");
     anchor.setAttribute("aria-label", "Open the paper's graphical abstract");
@@ -94,30 +143,6 @@
     card.append(anchor);
     return card;
   }
-  function makeVideoCard() {
-    const card = node("div", "upgrade-media-card");
-    card.append(node("h4", "upgrade-subhead", "Experimental video"));
-    if (settings.videoSrc) {
-      const video = node("video", "upgrade-video");
-      video.controls = true;
-      video.playsInline = true;
-      video.preload = "metadata";
-      video.poster = settings.videoPoster;
-      const source = node("source");
-      source.src = settings.videoSrc;
-      source.type = settings.videoSrc.toLowerCase().endsWith(".webm") ? "video/webm" : "video/mp4";
-      video.append(source);
-      card.append(video);
-    } else {
-      const placeholder = node("div", "upgrade-video-placeholder");
-      placeholder.append(node("span", "upgrade-play-icon", "▶"));
-      placeholder.append(node("strong", "", "Actuation demonstration"));
-      placeholder.append(node("span", "", "Experimental video coming soon"));
-      card.append(placeholder);
-      card.append(makeLink(settings.doi, "View publication and supplementary media ↗", "upgrade-small-link"));
-    }
-    return card;
-  }
   function addLatestNews() {
     const section = document.querySelector("section.snapshot");
     if (!section || section.querySelector(".upgrade-latest-news")) return;
@@ -131,7 +156,7 @@
     addInsights(main, studies["10.1002/adhm.71804"]);
     main.append(makeLink(settings.doi, "Read the article ↗", "upgrade-paper-link"));
     const media = node("div", "upgrade-news-media");
-    media.append(makeVideoCard(), makeGraphicCard());
+    media.append(makeGraphicCard(), makeGifCard("Paper8.png", "Research GIF for dual-responsive bidirectional biofilm disruption"));
     article.append(main, media);
     title.insertAdjacentElement("afterend", article);
   }
