@@ -1,4 +1,4 @@
-/* Portfolio enhancements: sitewide microrobot and publication research highlights.
+/* Portfolio enhancements: intro-only cursor-following microrobot and publication research highlights.
    Research GIFs load automatically from gifs/Paper1.gif through gifs/Paper8.gif.
    Missing GIFs use clearly identified animated graphical-abstract previews. */
 (() => {
@@ -160,9 +160,8 @@
     article.append(main, media);
     title.insertAdjacentElement("afterend", article);
   }
-  // A viewport-sized canvas stays fixed behind the complete page while scrolling.
-  // Pointer coordinates are viewport coordinates, so the boat follows the cursor
-  // across research, publications, news, and footer—not only the intro hero.
+  // Restore the original animation within the introductory hero only.
+  // Pointer coordinates are relative to the hero, not the full viewport.
   function makeWaterBoat() {
     const hero = document.querySelector("#home.hero");
     if (!hero || hero.querySelector(".upgrade-water")) return;
