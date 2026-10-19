@@ -135,51 +135,61 @@
     article.append(main, media);
     title.insertAdjacentElement("afterend", article);
   }
+  // A viewport-sized canvas stays fixed behind the complete page while scrolling.
+  // Pointer coordinates are viewport coordinates, so the boat follows the cursor
+  // across research, publications, news, and footer—not only the intro hero.
   function makeWaterBoat() {
-    const hero = document.querySelector("#home.hero");
-    if (!hero || hero.querySelector(".upgrade-water")) return;
+    if (document.querySelector(".upgrade-water")) return;
     const reduce = matchMedia("(prefers-reduced-motion: reduce)");
     const touchOnly = matchMedia("(hover: none)");
     const layer = node("div", "upgrade-water");
     layer.setAttribute("aria-hidden", "true");
     const canvas = node("canvas", "upgrade-water-canvas");
     layer.append(canvas);
-    hero.insertBefore(layer, hero.firstChild);
+    document.body.prepend(layer);
     const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    const state = {w:0,h:0,x:0,y:0,tx:0,ty:0,heading:0,wake:[],ripples:[],frame:0,last:0,paused:false,visible:true};
+    if (!ctx) { layer.remove(); return; }
+    const state = {
+      w:0,h:0,x:0,y:0,tx:0,ty:0,heading:0,
+      wake:[],ripples:[],frame:0,last:0,paused:false
+    };
     let raf = 0;
     const clamp = (v,low,high) => Math.min(high,Math.max(low,v));
     function resize() {
-      const bounds = hero.getBoundingClientRect();
       const oldW = state.w, oldH = state.h;
-      state.w = Math.max(1,bounds.width);
-      state.h = Math.max(1,bounds.height);
-      const dpr = Math.min(devicePixelRatio || 1,1.75);
+      state.w = Math.max(1,window.innerWidth);
+      state.h = Math.max(1,window.innerHeight);
+      const dpr = Math.min(window.devicePixelRatio || 1,1.75);
       canvas.width = Math.round(state.w * dpr);
       canvas.height = Math.round(state.h * dpr);
       ctx.setTransform(dpr,0,0,dpr,0,0);
-      if (!oldW) { state.x = state.tx = state.w*.67; state.y = state.ty = state.h*.72; }
-      else {
-        state.x *= state.w/oldW; state.tx *= state.w/oldW;
-        state.y *= state.h/oldH; state.ty *= state.h/oldH;
+      if (!oldW) {
+        state.x = state.tx = state.w*.67;
+        state.y = state.ty = state.h*.72;
+      } else {
+        state.x *= state.w/oldW;
+        state.tx *= state.w/oldW;
+        state.y *= state.h/oldH;
+        state.ty *= state.h/oldH;
       }
       draw(performance.now());
     }
     function pointer(event) {
-      if (reduce.matches || touchOnly.matches || state.paused) return;
-      const bounds = hero.getBoundingClientRect();
-      state.tx = clamp(event.clientX-bounds.left,35,state.w-35);
-      state.ty = clamp(event.clientY-bounds.top,35,state.h-35);
-      if (state.ripples.length < 14) state.ripples.push({x:state.tx,y:state.ty,r:1,a:.24});
+      if (reduce.matches || touchOnly.matches || state.paused || (event.pointerType !== "mouse" && event.pointerType !== "pen")) return;
+      state.tx = clamp(event.clientX,35,Math.max(35,state.w-35));
+      state.ty = clamp(event.clientY,35,Math.max(35,state.h-35));
+      if (state.ripples.length < 14) {
+        state.ripples.push({x:state.tx,y:state.ty,r:1,a:.24});
+      }
     }
     function water(t) {
       ctx.clearRect(0,0,state.w,state.h);
       const gradient = ctx.createLinearGradient(0,0,state.w,state.h);
-      gradient.addColorStop(0,"rgba(220,244,235,.84)");
-      gradient.addColorStop(.55,"rgba(219,245,238,.75)");
-      gradient.addColorStop(1,"rgba(143,211,213,.68)");
-      ctx.fillStyle=gradient; ctx.fillRect(0,0,state.w,state.h);
+      gradient.addColorStop(0,"rgba(220,244,235,.90)");
+      gradient.addColorStop(.55,"rgba(209,241,235,.88)");
+      gradient.addColorStop(1,"rgba(129,203,211,.80)");
+      ctx.fillStyle=gradient;
+      ctx.fillRect(0,0,state.w,state.h);
       ctx.lineWidth=1.1;
       for(let y=-10;y<state.h+30;y+=33){
         const phase=t*.00025+y*.025;
@@ -188,73 +198,113 @@
           const yy=y+Math.sin(x*.018+phase)*6+Math.sin(x*.04-phase*.8)*2;
           if(x===-10) ctx.moveTo(x,yy); else ctx.lineTo(x,yy);
         }
-        ctx.strokeStyle="rgba(8,104,130,.11)"; ctx.stroke();
+        ctx.strokeStyle="rgba(8,104,130,.15)";
+        ctx.stroke();
       }
       state.ripples.forEach(r=>{
-        ctx.beginPath(); ctx.ellipse(r.x,r.y,r.r*1.25,r.r*.46,0,0,Math.PI*2);
-        ctx.strokeStyle="rgba(8,107,128,"+r.a+")"; ctx.stroke();
+        ctx.beginPath();
+        ctx.ellipse(r.x,r.y,r.r*1.25,r.r*.46,0,0,Math.PI*2);
+        ctx.strokeStyle="rgba(8,107,128,"+r.a+")";
+        ctx.stroke();
       });
       state.wake.forEach(r=>{
-        ctx.beginPath(); ctx.ellipse(r.x,r.y,r.r*1.25,r.r*.56,r.angle,0,Math.PI*2);
-        ctx.fillStyle="rgba(5,103,129,"+r.a+")"; ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(r.x,r.y,r.r*1.25,r.r*.56,r.angle,0,Math.PI*2);
+        ctx.fillStyle="rgba(5,103,129,"+r.a+")";
+        ctx.fill();
       });
     }
     function boat(t) {
       ctx.save();
       ctx.translate(state.x,state.y+Math.sin(t*.002)*1);
       ctx.rotate(state.heading+Math.PI/2);
-      ctx.shadowColor="rgba(6,59,72,.24)";ctx.shadowBlur=13;
+      ctx.shadowColor="rgba(6,59,72,.24)";
+      ctx.shadowBlur=13;
       for(const side of [-1,1]) {
         const x=side*12;
-        ctx.fillStyle="#155669"; ctx.strokeStyle="#eafff9"; ctx.lineWidth=1.6;
-        ctx.beginPath();ctx.moveTo(x,-24);ctx.bezierCurveTo(x+6,-19,x+6,19,x,23);
-        ctx.bezierCurveTo(x-6,19,x-6,-19,x,-24);ctx.closePath();ctx.fill();ctx.stroke();
-        ctx.fillStyle="#a6e4d5";ctx.fillRect(x-2,-9,4,17);
+        ctx.fillStyle="#155669";
+        ctx.strokeStyle="#eafff9";
+        ctx.lineWidth=1.6;
+        ctx.beginPath();
+        ctx.moveTo(x,-24);
+        ctx.bezierCurveTo(x+6,-19,x+6,19,x,23);
+        ctx.bezierCurveTo(x-6,19,x-6,-19,x,-24);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle="#a6e4d5";
+        ctx.fillRect(x-2,-9,4,17);
       }
       ctx.shadowBlur=0;
-      ctx.fillStyle="#eefcf8";ctx.fillRect(-12,-10,24,6);ctx.fillRect(-12,11,24,6);
-      ctx.fillStyle="#07816f";ctx.beginPath();ctx.roundRect(-6,-14,12,29,5);ctx.fill();
-      ctx.fillStyle="#c3f69d";ctx.beginPath();ctx.arc(0,-8,3.2,0,Math.PI*2);ctx.fill();
-      ctx.fillStyle="#35d9d4";ctx.beginPath();ctx.arc(0,17,3.1,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle="#eefcf8";
+      ctx.fillRect(-12,-10,24,6);
+      ctx.fillRect(-12,11,24,6);
+      ctx.fillStyle="#07816f";
+      ctx.beginPath();
+      ctx.roundRect(-6,-14,12,29,5);
+      ctx.fill();
+      ctx.fillStyle="#c3f69d";
+      ctx.beginPath();
+      ctx.arc(0,-8,3.2,0,Math.PI*2);
+      ctx.fill();
+      ctx.fillStyle="#35d9d4";
+      ctx.beginPath();
+      ctx.arc(0,17,3.1,0,Math.PI*2);
+      ctx.fill();
       ctx.restore();
     }
-    function draw(t) { water(t);boat(t); }
+    function draw(t) {water(t);boat(t);}
     function tick(t) {
-      if (state.paused || reduce.matches || touchOnly.matches || !state.visible || document.hidden) {raf=0;return;}
-      const dt=clamp((t-(state.last||t))/16.67,.4,2.5);state.last=t;
+      if (state.paused || reduce.matches || touchOnly.matches || document.hidden) {raf=0;return;}
+      const dt=clamp((t-(state.last||t))/16.67,.4,2.5);
+      state.last=t;
       const dx=state.tx-state.x,dy=state.ty-state.y,dist=Math.hypot(dx,dy);
       if(dist>1.5) {
         const desired=Math.atan2(dy,dx);
         state.heading+=Math.atan2(Math.sin(desired-state.heading),Math.cos(desired-state.heading))*.13*dt;
         const v=Math.min(dist,Math.max(1.4,dist*.036)*dt+1.1*dt);
-        state.x+=Math.cos(state.heading)*v;state.y+=Math.sin(state.heading)*v;
-        if(++state.frame%4===0)state.wake.push({x:state.x-Math.cos(state.heading)*24,y:state.y-Math.sin(state.heading)*24,r:1.5,a:.2,angle:state.heading});
+        state.x+=Math.cos(state.heading)*v;
+        state.y+=Math.sin(state.heading)*v;
+        if(++state.frame%4===0) {
+          state.wake.push({
+            x:state.x-Math.cos(state.heading)*24,
+            y:state.y-Math.sin(state.heading)*24,
+            r:1.5,a:.2,angle:state.heading
+          });
+        }
       }
       state.wake=state.wake.filter(r=>(r.a-=.005*dt)>0 && (r.r+=.15*dt)>0);
       state.ripples=state.ripples.filter(r=>(r.a-=.006*dt)>0 && (r.r+=.44*dt)>0);
-      draw(t);raf=requestAnimationFrame(tick);
+      draw(t);
+      raf=requestAnimationFrame(tick);
     }
     function start() {
-      cancelAnimationFrame(raf);state.last=0;
-      if(!state.paused && !reduce.matches && !touchOnly.matches && state.visible && !document.hidden)raf=requestAnimationFrame(tick);
-      else draw(performance.now());
+      cancelAnimationFrame(raf);
+      state.last=0;
+      if(!state.paused && !reduce.matches && !touchOnly.matches && !document.hidden) {
+        raf=requestAnimationFrame(tick);
+      } else {
+        draw(performance.now());
+      }
     }
-    hero.addEventListener("pointermove",pointer,{passive:true});
+    // Passive listener on window receives movement over cards and every section.
+    window.addEventListener("pointermove",pointer,{passive:true});
     const toggle=node("button","upgrade-water-toggle","Pause animation");
-    toggle.type="button";toggle.setAttribute("aria-pressed","false");
+    toggle.type="button";
+    toggle.setAttribute("aria-pressed","false");
     toggle.addEventListener("click",()=>{
       state.paused=!state.paused;
       toggle.textContent=state.paused?"Play animation":"Pause animation";
-      toggle.setAttribute("aria-pressed",String(state.paused));start();
+      toggle.setAttribute("aria-pressed",String(state.paused));
+      start();
     });
-    hero.append(toggle);
-    if(touchOnly.matches)toggle.hidden=true;
-    window.addEventListener("resize",resize,{passive:true});
+    document.body.append(toggle);
+    if (touchOnly.matches) toggle.hidden=true;
+    window.addEventListener("resize",()=>{resize();start();},{passive:true});
     document.addEventListener("visibilitychange",start);
-    if("ResizeObserver" in window)new ResizeObserver(resize).observe(hero);
-    if("IntersectionObserver" in window)new IntersectionObserver(entries=>{state.visible=entries[0].isIntersecting;start();},{threshold:.05}).observe(hero);
     if(reduce.addEventListener)reduce.addEventListener("change",start);
-    resize();start();
+    resize();
+    start();
   }
   function init(){addLatestNews();enhancePublications();makeWaterBoat();}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});
