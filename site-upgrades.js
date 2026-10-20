@@ -1,6 +1,6 @@
-/* Portfolio enhancements: intro-only cursor-following microrobot and publication research highlights.
-   Research GIFs load automatically from gifs/Paper1.gif through gifs/Paper8.gif.
-   Missing GIFs use clearly identified animated graphical-abstract previews. */
+/* Portfolio enhancements: intro-only microrobot and publication research highlights.
+   Only the Latest News article uses a GIF (gifs/Paper8.gif).
+   Until supplied, that panel displays a labeled animated graphical-abstract preview. */
 (() => {
   "use strict";
   const settings = {
@@ -64,9 +64,8 @@
     parent.append(wrap);
   }
   function gifPath(poster) {
-    // The eight existing graphical abstract images are Paper1.png ... Paper8.png.
-    const match = String(poster || "").match(/(?:^|\/)(Paper[1-8])\.(?:png|jpe?g|webp)$/i);
-    return match ? "gifs/" + match[1] + ".gif" : "";
+    // News only: the biofilm-disruption paper uses the user's future research GIF.
+    return poster === "Paper8.png" ? "gifs/Paper8.gif" : "";
   }
   function makeGifCard(poster, label) {
     const card = node("div", "upgrade-media-card upgrade-gif-card");
@@ -114,15 +113,11 @@
       const media = article.querySelector(".publication-visuals");
       const figure = media && media.querySelector(".pub-figure");
       if (!media || !figure || media.classList.contains("upgrade-paper-media")) return;
-      const poster = figure.querySelector("img")?.getAttribute("src");
-      if (!poster) return;
       const graphicCard = node("div", "upgrade-media-card upgrade-graphic-card");
       graphicCard.append(node("h4", "upgrade-subhead", "Graphical abstract"));
-      // Reparent the existing figure: its keyboard-accessible lightbox still works.
+      // Preserve the original graphical abstract and its keyboard-accessible lightbox.
       figure.before(graphicCard);
       graphicCard.append(figure);
-      const paperTitle = main.querySelector("h3")?.textContent || "this publication";
-      media.append(makeGifCard(poster, "Research GIF for " + paperTitle));
       media.classList.add("upgrade-paper-media");
     });
   }
