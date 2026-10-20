@@ -133,3 +133,187 @@
 @media (prefers-reduced-motion: reduce) {
   .upgrade-gif-preview { animation: none; }
 }
+
+
+/* News & Updates: match the supplied editorial layout, without changing publications. */
+/* Keep the IEEE RoboSoft 2026 announcement at the original publication-card width. */
+.snapshot > article.publication-item:not(.upgrade-latest-news) {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto 24px;
+}
+
+/* Only the featured research announcement expands for three columns. */
+.snapshot > article.upgrade-latest-news {
+  display: block;
+  width: 100%;
+  max-width: 1440px;
+  padding: clamp(15px, 2.1vw, 28px);
+  margin: 0 auto 26px;
+  background: #fff;
+}
+
+.upgrade-news-header {
+  display: grid;
+  grid-template-columns: minmax(105px, 1fr) minmax(0, 7fr) minmax(105px, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding: clamp(18px, 2.4vw, 32px);
+  margin-bottom: clamp(18px, 2.2vw, 28px);
+  border-radius: 9px;
+  background: linear-gradient(115deg, #154f56, #0f6b57);
+  color: #fff;
+  text-align: center;
+}
+.upgrade-news-heading {
+  min-width: 0;
+}
+.upgrade-news-header h3 {
+  margin: 7px auto 10px;
+  font-size: clamp(21px, 2.15vw, 31px);
+  line-height: 1.26;
+  color: #fff;
+  text-wrap: balance;
+}
+.upgrade-news-header .upgrade-news-date {
+  margin: 0;
+  color: #c7ecdd;
+  font-size: 12px;
+}
+.upgrade-news-header .upgrade-citation {
+  margin: 0 0 3px;
+  color: rgba(255, 255, 255, .93);
+  font-weight: 650;
+  font-size: clamp(13px, 1.1vw, 16px);
+}
+.upgrade-news-header .upgrade-paper-link {
+  justify-self: end;
+  align-self: center;
+  margin: 0 !important;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, .95);
+  color: #0f5b53 !important;
+  border-radius: 7px;
+  white-space: nowrap;
+  font-size: 13px;
+  text-align: center;
+}
+.upgrade-news-header .upgrade-paper-link:hover {
+  background: #dff6ec;
+  color: #08493f !important;
+}
+
+.snapshot > .upgrade-latest-news .upgrade-news-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr) minmax(0, 1fr);
+  align-items: stretch;
+  gap: clamp(12px, 1.3vw, 20px);
+}
+.upgrade-news-layout > .upgrade-media-card {
+  height: 100%;
+  min-width: 0;
+  border: 1px solid rgba(15, 107, 87, .2);
+  box-shadow: 0 5px 16px rgba(21, 33, 31, .04);
+}
+.upgrade-news-layout > .upgrade-media-card > .upgrade-subhead {
+  font-size: 13px !important;
+  font-weight: 800;
+  color: var(--green, #0f6b57);
+}
+.upgrade-news-layout .upgrade-graphic-card .upgrade-image-link,
+.upgrade-news-layout .upgrade-gif-stage {
+  flex: 1;
+  aspect-ratio: auto;
+  min-height: clamp(260px, 26vw, 415px);
+}
+.upgrade-news-layout .upgrade-news-image,
+.upgrade-news-layout .upgrade-gif-stage img {
+  object-fit: contain;
+}
+.upgrade-news-center {
+  min-width: 0;
+  min-height: clamp(320px, 29vw, 460px);
+  display: grid;
+  grid-template-rows: minmax(0, 2fr) minmax(0, 1fr);
+  gap: clamp(12px, 1.3vw, 20px);
+}
+.upgrade-news-detail {
+  min-width: 0;
+  padding: clamp(17px, 1.55vw, 23px);
+  border: 1px solid rgba(15, 107, 87, .2);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 5px 16px rgba(21, 33, 31, .04);
+}
+.upgrade-news-detail .upgrade-subhead {
+  margin-bottom: 14px !important;
+  font-size: 13px !important;
+}
+.upgrade-news-detail .upgrade-impact {
+  margin: 0;
+  font-size: clamp(14px, 1vw, 16px);
+  line-height: 1.75;
+}
+.upgrade-news-detail .upgrade-chips {
+  gap: 8px;
+}
+.upgrade-news-detail .upgrade-chip {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+@media (max-width: 1090px) {
+  .snapshot > .upgrade-latest-news .upgrade-news-layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .upgrade-news-layout > .upgrade-graphic-card {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .upgrade-news-layout > .upgrade-gif-card {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .upgrade-news-layout > .upgrade-news-center {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    grid-template-rows: auto;
+    min-height: 0;
+  }
+  .upgrade-news-layout .upgrade-graphic-card .upgrade-image-link,
+  .upgrade-news-layout .upgrade-gif-stage {
+    aspect-ratio: 4 / 3;
+    min-height: 0;
+  }
+}
+@media (max-width: 670px) {
+  .upgrade-news-header {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 18px 15px;
+  }
+  .upgrade-news-header-spacer {
+    display: none;
+  }
+  .upgrade-news-header .upgrade-paper-link {
+    justify-self: center;
+    margin-top: 10px !important;
+  }
+  .snapshot > .upgrade-latest-news .upgrade-news-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .upgrade-news-layout > .upgrade-graphic-card {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .upgrade-news-layout > .upgrade-news-center {
+    grid-column: 1;
+    grid-row: 2;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .upgrade-news-layout > .upgrade-gif-card {
+    grid-column: 1;
+    grid-row: 3;
+  }
+}
