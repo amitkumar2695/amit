@@ -82,7 +82,9 @@
     if (gifSrc && !reducedMotion) {
       const gif = node("img", "upgrade-gif-image");
       gif.alt = label || "Research animation for this publication";
-      gif.loading = "lazy";
+      // Loading while display:none can deadlock lazy-loaded images:
+      // the CSS keeps this image in layout (transparent) until its load event.
+      gif.loading = "eager";
       gif.decoding = "async";
       gif.addEventListener("load", () => {
         gif.classList.add("is-ready");
@@ -91,7 +93,7 @@
       }, {once:true});
       gif.addEventListener("error", () => {
         gif.remove();
-        status.textContent = "Animated graphical abstract preview";
+        status.textContent = "Research GIF could not load — showing animated graphical abstract preview";
       }, {once:true});
       gif.src = gifSrc;
       stage.append(gif);
