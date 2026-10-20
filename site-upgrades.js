@@ -65,7 +65,7 @@
   }
   function gifPath(poster) {
     // News only: the biofilm-disruption paper uses the user's future research GIF.
-    return poster === "Paper8.png" ? "gifs/Paper8.gif" : "";
+    return poster === "Paper8.png" ? "gifs/Paper8.gif": "";
   }
   function makeGifCard(poster, label) {
     const card = node("div", "upgrade-media-card upgrade-gif-card");
