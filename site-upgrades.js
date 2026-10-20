@@ -177,7 +177,7 @@
     visualRow.append(
       makeGraphicCard(),
       center,
-      makeGifCard("Paper8.gif", "Research GIF for dual-responsive bidirectional biofilm disruption")
+      makeGifCard("Paper8.png", "Research GIF for dual-responsive bidirectional biofilm disruption")
     );
     article.append(header, visualRow);
     title.insertAdjacentElement("afterend", article);
