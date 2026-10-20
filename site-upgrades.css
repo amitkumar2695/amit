@@ -106,9 +106,11 @@
   filter: saturate(.93);
   animation: upgrade-preview-motion 7s ease-in-out infinite alternate;
 }
-.upgrade-gif-preview[hidden],
-.upgrade-gif-image:not(.is-ready) { display: none; }
-.upgrade-gif-image.is-ready { display: block; }
+.upgrade-gif-preview[hidden] { display: none; }
+/* Don't use display:none here: hidden/lazy images may never fire load.
+   Keep the GIF in layout while the preview is shown, then reveal it. */
+.upgrade-gif-image { display: block; opacity: 0; }
+.upgrade-gif-image.is-ready { opacity: 1; }
 .upgrade-media-status {
   color: var(--muted, #5f6f6b);
   font-size: 11px;
