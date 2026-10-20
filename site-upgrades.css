@@ -26,24 +26,30 @@
 @media(max-width:650px){#home .hero-copy{background:rgba(250,254,251,.84)}.upgrade-news-media{grid-template-columns:1fr}.upgrade-latest-news h3{font-size:21px}}
 @media(prefers-reduced-motion:reduce){#home .upgrade-water-toggle{display:none}#home .hero-copy{background:rgba(250,254,251,.92)}}
 
-/* Publications and news: wider research text + TWO equally sized media cards. */
-#publications .publication-list,
-.snapshot > .upgrade-latest-news {
-  max-width: 1560px;
-  width: 100%;
+/* Restore the original published-paper width (1180px) and single graphical-abstract panel. */
+#publications .publication-list {
+  max-width: 1180px;
 }
-#publications .publication-list > .publication-item,
-.snapshot > .upgrade-latest-news {
-  grid-template-columns: minmax(290px, .95fr) minmax(0, 1.55fr);
-  align-items: start;
-  gap: clamp(18px, 2.1vw, 34px);
+#publications .publication-list > .publication-item {
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+  gap: 24px;
 }
-#publications .publication-list .publication-visuals.upgrade-paper-media,
+#publications .publication-list .publication-visuals.upgrade-paper-media {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* Latest News alone retains the side-by-side graphical abstract and research GIF. */
+.snapshot > .upgrade-latest-news {
+  max-width: 1180px;
+  grid-template-columns: minmax(300px, .95fr) minmax(0, 1.25fr);
+  gap: clamp(18px, 2.1vw, 28px);
+}
 .snapshot > .upgrade-latest-news .upgrade-news-media {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: stretch;
-  gap: clamp(10px, 1.3vw, 18px);
+  gap: 12px;
 }
 .upgrade-media-card {
   display: flex;
@@ -113,14 +119,13 @@
   from {transform: scale(1) translateY(0);}
   to {transform: scale(1.035) translateY(-1.5%);}
 }
-@media (max-width: 1100px) {
+@media (max-width: 980px) {
   #publications .publication-list > .publication-item,
   .snapshot > .upgrade-latest-news {
     grid-template-columns: minmax(0, 1fr);
   }
 }
 @media (max-width: 560px) {
-  #publications .publication-list .publication-visuals.upgrade-paper-media,
   .snapshot > .upgrade-latest-news .upgrade-news-media {
     grid-template-columns: 1fr;
   }

@@ -1,28 +1,21 @@
-# Research GIF gallery
+# Latest News — research GIF
 
-The website now displays **two equal-sized media cards** beside each publication: the existing graphical abstract and an optional animated GIF.
+The GIF panel is now used **only in Latest News**, for the recently published article:
 
-## Add your GIFs
+**Dual-Responsive Bidirectional Actuator for Biofilm Disruption on Medical Surfaces** (*Advanced Healthcare Materials*, 2026).
 
-Upload these files into this `gifs/` directory (case-sensitive names):
+## How to add the GIF
 
-| File | Publication |
-| --- | --- |
-| `Paper8.gif` | Dual-Responsive Bidirectional Actuator for Biofilm Disruption on Medical Surfaces (2026) |
-| `Paper1.gif` | Programmable 4D-Printed Soft Actuators (2025) |
-| `Paper2.gif` | Actuation-Induced Multidrug Release from Chitosan/CMC Bilayer Films (2025) |
-| `Paper3.gif` | 4D Printing of pH-Responsive Bilayers (2024) |
-| `Paper4.gif` | Superhydrophobic Asymmetric pH-Responsive Soft Actuators (2024) |
-| `Paper5.gif` | Reducing Scrolling of DMEK Corneal Grafts (2023) |
-| `Paper6.gif` | Solvent-Triggered Shape Morphism of 4D-Printed Hydrogels (2023) |
-| `Paper7.gif` | Nonmorphing Point of Actuation for Controlled Drug Release (2022) |
+Upload one file to this directory, named exactly:
 
-The website uses the existing `Paper1.png` ... `Paper8.png` graphical abstracts as **illustrative, slightly animated previews** when corresponding GIFs have not yet been uploaded. These are *not* experimental demonstrations and should not be described as measured results. Upload your original, permission-cleared research animations to replace them automatically.
+`gifs/Paper8.gif`
 
-- **Latest News** and the first publication share **`gifs/Paper8.gif`**.
-- No extra code changes are needed: the correct GIF is selected automatically from its graphical-abstract filename.
-- Aim for a short, looping, optimized GIF (about 640–800 px wide, ideally below 3–5 MB) for reasonable GitHub Pages performance.
-- GIFs should contain research media you own or are permitted to publish; anonymize any sensitive patient-related material.
-- People with reduced-motion preferences see a static graphical-abstract preview instead of an auto-playing GIF.
+The Latest News announcement displays it automatically **beside** the existing graphical abstract (`Paper8.png`), with matching 4:3 media cards.
 
-Please verify each GIF corresponds to the correct publication before uploading.
+The **Published Articles** section displays only the existing graphical abstracts, research impact summaries, keywords and DOI links. No publication-card GIFs are used.
+
+Until `Paper8.gif` is uploaded, the Latest News GIF slot displays a **clearly labeled illustrative animated preview** of the existing graphical abstract. This is *not* experimental footage. Replace it with your actual, permission-cleared research animation.
+
+**Recommendations:** Use a short looping GIF, ideally under 3–5 MB and approximately 640–800 pixels wide. If the GIF includes sensitive or identifiable material, ensure it is cleared for public distribution.
+
+Visitors who prefer reduced motion see the static graphical-abstract preview in the GIF slot.
