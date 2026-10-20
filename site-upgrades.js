@@ -143,16 +143,41 @@
     if (!section || section.querySelector(".upgrade-latest-news")) return;
     const title = section.querySelector(".section-heading");
     if (!title) return;
+
+    // Editorial feature layout: header across the card, followed by
+    // graphical abstract | stacked research impact + keywords | GIF.
     const article = node("article", "publication-item upgrade-latest-news");
-    const main = node("div", "publication-main");
-    main.append(node("p", "year", "6 October 2026  ·  New publication"));
-    main.append(node("h3", "", "Dual-Responsive Bidirectional Actuator for Biofilm Disruption on Medical Surfaces"));
-    main.append(node("p", "upgrade-citation", "Amit Kumar and collaborators · Advanced Healthcare Materials (2026)"));
-    addInsights(main, studies["10.1002/adhm.71804"]);
-    main.append(makeLink(settings.doi, "Read the article ↗", "upgrade-paper-link"));
-    const media = node("div", "upgrade-news-media");
-    media.append(makeGraphicCard(), makeGifCard("Paper8.png", "Research GIF for dual-responsive bidirectional biofilm disruption"));
-    article.append(main, media);
+    article.setAttribute("aria-label", "Latest published research: dual-responsive biofilm-disrupting actuator");
+
+    const header = node("header", "upgrade-news-header");
+    const headerSpacer = node("span", "upgrade-news-header-spacer");
+    headerSpacer.setAttribute("aria-hidden", "true");
+    const heading = node("div", "upgrade-news-heading");
+    heading.append(node("p", "year upgrade-news-date", "6 October 2026  ·  New publication"));
+    heading.append(node("h3", "", "Dual-Responsive Bidirectional Actuator for Biofilm Disruption on Medical Surfaces"));
+    heading.append(node("p", "upgrade-citation", "Amit Kumar and collaborators"));
+    heading.append(node("p", "upgrade-citation upgrade-journal", "Advanced Healthcare Materials (2026)"));
+    header.append(headerSpacer, heading, makeLink(settings.doi, "Read Article ↗", "upgrade-paper-link"));
+
+    const research = studies["10.1002/adhm.71804"];
+    const center = node("div", "upgrade-news-center");
+    const impact = node("section", "upgrade-news-detail upgrade-news-impact");
+    impact.append(node("h4", "upgrade-subhead", "Key research impact"));
+    impact.append(node("p", "upgrade-impact", research.impact));
+    const keywords = node("section", "upgrade-news-detail upgrade-news-keywords");
+    keywords.append(node("h4", "upgrade-subhead", "Keywords"));
+    const chips = node("div", "upgrade-chips");
+    research.keywords.forEach(keyword => chips.append(node("span", "upgrade-chip", keyword)));
+    keywords.append(chips);
+    center.append(impact, keywords);
+
+    const visualRow = node("div", "upgrade-news-layout");
+    visualRow.append(
+      makeGraphicCard(),
+      center,
+      makeGifCard("Paper8.png", "Research GIF for dual-responsive bidirectional biofilm disruption")
+    );
+    article.append(header, visualRow);
     title.insertAdjacentElement("afterend", article);
   }
   // Restore the original animation within the introductory hero only.
