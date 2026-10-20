@@ -143,12 +143,12 @@
   margin: 0 auto 24px;
 }
 
-/* Only the featured research announcement expands for three columns. */
+/* Match the featured publication card width to the IEEE RoboSoft announcement. */
 .snapshot > article.upgrade-latest-news {
   display: block;
   width: 100%;
-  max-width: 1440px;
-  padding: clamp(15px, 2.1vw, 28px);
+  max-width: 1180px;
+  padding: clamp(16px, 1.8vw, 22px);
   margin: 0 auto 26px;
   background: #fff;
 }
@@ -158,8 +158,8 @@
   grid-template-columns: minmax(105px, 1fr) minmax(0, 7fr) minmax(105px, 1fr);
   align-items: center;
   gap: 12px;
-  padding: clamp(18px, 2.4vw, 32px);
-  margin-bottom: clamp(18px, 2.2vw, 28px);
+  padding: clamp(16px, 2vw, 24px);
+  margin-bottom: clamp(16px, 1.8vw, 22px);
   border-radius: 9px;
   background: linear-gradient(115deg, #154f56, #0f6b57);
   color: #fff;
@@ -170,7 +170,7 @@
 }
 .upgrade-news-header h3 {
   margin: 7px auto 10px;
-  font-size: clamp(21px, 2.15vw, 31px);
+  font-size: clamp(20px, 2vw, 27px);
   line-height: 1.26;
   color: #fff;
   text-wrap: balance;
@@ -205,9 +205,9 @@
 
 .snapshot > .upgrade-latest-news .upgrade-news-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 1fr);
   align-items: stretch;
-  gap: clamp(12px, 1.3vw, 20px);
+  gap: clamp(10px, 1.2vw, 16px);
 }
 .upgrade-news-layout > .upgrade-media-card {
   height: 100%;
@@ -224,7 +224,7 @@
 .upgrade-news-layout .upgrade-gif-stage {
   flex: 1;
   aspect-ratio: auto;
-  min-height: clamp(260px, 26vw, 415px);
+  min-height: clamp(245px, 23vw, 330px);
 }
 .upgrade-news-layout .upgrade-news-image,
 .upgrade-news-layout .upgrade-gif-stage img {
@@ -232,14 +232,14 @@
 }
 .upgrade-news-center {
   min-width: 0;
-  min-height: clamp(320px, 29vw, 460px);
+  min-height: clamp(300px, 27vw, 370px);
   display: grid;
-  grid-template-rows: minmax(0, 2fr) minmax(0, 1fr);
-  gap: clamp(12px, 1.3vw, 20px);
+  grid-template-rows: minmax(min-content, 1.75fr) minmax(min-content, 1fr);
+  gap: clamp(10px, 1.2vw, 16px);
 }
 .upgrade-news-detail {
   min-width: 0;
-  padding: clamp(17px, 1.55vw, 23px);
+  padding: clamp(14px, 1.35vw, 18px);
   border: 1px solid rgba(15, 107, 87, .2);
   border-radius: 10px;
   background: #fff;
@@ -251,8 +251,8 @@
 }
 .upgrade-news-detail .upgrade-impact {
   margin: 0;
-  font-size: clamp(14px, 1vw, 16px);
-  line-height: 1.75;
+  font-size: clamp(13px, 1vw, 15px);
+  line-height: 1.65;
 }
 .upgrade-news-detail .upgrade-chips {
   gap: 8px;
