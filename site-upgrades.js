@@ -157,7 +157,7 @@
     const heading = node("div", "upgrade-news-heading");
     heading.append(node("p", "year upgrade-news-date", "6 October 2026  ·  New publication"));
     heading.append(node("h3", "", "Dual-Responsive Bidirectional Actuator for Biofilm Disruption on Medical Surfaces"));
-    heading.append(node("p", "upgrade-citation", "Amit Kumar and collaborators"));
+    heading.append(node("p", "upgrade-citation", "Amit Kumar, Anas Saifi, Kumari Kiran, Sanjib Senapati, Nitish R. Mahapatra, Pijush Ghosh"));
     heading.append(node("p", "upgrade-citation upgrade-journal", "Advanced Healthcare Materials (2026)"));
     header.append(headerSpacer, heading, makeLink(settings.doi, "Read Article ↗", "upgrade-paper-link"));
 
@@ -177,7 +177,7 @@
     visualRow.append(
       makeGraphicCard(),
       center,
-      makeGifCard("Paper8.png", "Research GIF for dual-responsive bidirectional biofilm disruption")
+      makeGifCard("Paper8.png", "Dual-responsive Bilayer Actuator")
     );
     article.append(header, visualRow);
     title.insertAdjacentElement("afterend", article);
