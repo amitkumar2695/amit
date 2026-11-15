@@ -149,7 +149,7 @@
     if (!title) return;
 
     // Editorial feature layout: header across the card, followed by
-    // graphical abstract | research impact | GIF.
+    // graphical abstract | equally tall research-impact and GIF cards; keywords below.
     const article = node("article", "publication-item upgrade-latest-news");
     article.setAttribute("aria-label", "Latest published research: dual-responsive biofilm-disrupting actuator");
 
@@ -168,15 +168,22 @@
     const impact = node("section", "upgrade-news-detail upgrade-news-impact");
     impact.append(node("h4", "upgrade-subhead", "Key research impact"));
     impact.append(node("p", "upgrade-impact", research.impact));
-    // The separate Keywords panel is omitted from the featured news card.
-    // Other publication entries retain their own research-impact keywords.
     center.append(impact);
+
+    // Use the space beneath the two upper cards for the featured keywords,
+    // while leaving all regular publication entries unchanged.
+    const keywords = node("section", "upgrade-news-detail upgrade-news-keywords");
+    keywords.append(node("h4", "upgrade-subhead", "Keywords"));
+    const chips = node("div", "upgrade-chips");
+    research.keywords.forEach(keyword => chips.append(node("span", "upgrade-chip", keyword)));
+    keywords.append(chips);
 
     const visualRow = node("div", "upgrade-news-layout");
     visualRow.append(
       makeGraphicCard(),
       center,
-      makeGifCard("Paper8.png", "Dual-responsive Bilayer Actuator")
+      makeGifCard("Paper8.png", "Dual-responsive Bilayer Actuator"),
+      keywords
     );
     article.append(header, visualRow);
     title.insertAdjacentElement("afterend", article);
