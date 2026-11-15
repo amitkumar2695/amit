@@ -828,3 +828,46 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
   outline-offset: 4px;
 }
 ::selection { background: var(--accent); color: var(--on-accent); }
+
+/* Justify long-form copy while preserving compact labels and controls. */
+main .section-pad :is(h1, h2, h3),
+main .section-pad p:not(.eyebrow):not(.tag):not(.year):not(.upgrade-citation):not(.upgrade-media-status) {
+  text-align: justify;
+  text-align-last: auto;
+  text-justify: inter-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+/* Short profile details remain grouped around the portrait. */
+main .hero-card :is(h2, p) { text-align: center; }
+
+/* Center incomplete rows at the same card width as complete rows. */
+.snapshot-grid,
+.research-map,
+.award-grid,
+.service-grid,
+.two-col,
+.talk-list,
+.metric-strip {
+  --card-columns: 4;
+  --card-gap: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--card-gap);
+}
+.research-map { --card-gap: 18px; }
+.metric-strip { --card-gap: 10px; }
+.award-grid, .service-grid, .two-col { --card-columns: 2; }
+.talk-list { --card-columns: 3; }
+:is(.snapshot-grid, .research-map, .award-grid, .service-grid, .two-col, .talk-list, .metric-strip) > * {
+  flex: 0 0 calc((100% - (var(--card-columns) - 1) * var(--card-gap)) / var(--card-columns));
+  min-width: 0;
+}
+@media (max-width: 980px) {
+  .snapshot-grid, .research-map, .talk-list { --card-columns: 2; }
+}
+@media (max-width: 760px) {
+  .snapshot-grid, .research-map, .award-grid, .service-grid,
+  .two-col, .talk-list, .metric-strip { --card-columns: 1; }
+}
