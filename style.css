@@ -678,7 +678,7 @@ h3 {
   margin: 0 auto;
   padding: clamp(28px, 5vw, 52px);
   border-radius: var(--radius);
-  background: linear-gradient(135deg, #edc8bf, #f7e6e8);
+  background: linear-gradient(115deg, #edc8bf, #e9afbe);
   color: var(--ink);
 }
 
@@ -869,4 +869,77 @@ body { overflow-wrap: break-word; }
 @media (max-width: 760px) {
   .snapshot-grid, .research-map, .award-grid, .service-grid,
   .two-col, .talk-list, .metric-strip { --card-columns: 1; }
+}
+
+
+/* Navigation destinations use a consistent first-screen layout.
+   Leave the home introduction unaffected; align every other section
+   just below the sticky header and bring its content into view sooner. */
+main > section.section-pad[id]:not(#home) {
+  scroll-margin-top: 84px;
+  padding-top: clamp(24px, 3vw, 38px);
+  padding-bottom: clamp(48px, 5vw, 76px);
+}
+
+main > section.section-pad[id]:not(#home) > .section-heading {
+  max-width: 1040px;
+  margin: 0 auto clamp(18px, 2vw, 26px);
+  text-align: center;
+}
+
+main > section.section-pad[id]:not(#home) > .section-heading .eyebrow {
+  margin: 0 0 8px;
+  font-size: 12px;
+}
+
+main > section.section-pad[id]:not(#home) > .section-heading h2 {
+  margin: 0;
+  font-size: clamp(29px, 3.1vw, 43px);
+  line-height: 1.16;
+  text-wrap: balance;
+}
+
+/* Keep the research vision paragraph close to its title without squeezing it. */
+#research > .section-heading p:last-child {
+  max-width: 950px;
+  margin: 12px auto 0;
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.55;
+}
+
+/* Publications: show the first paper and its supporting details higher up. */
+#publications .filter-bar {
+  margin-bottom: 18px;
+  gap: 8px;
+}
+#publications .filter-btn {
+  padding: 8px 13px;
+}
+#publications .publication-list > .publication-item {
+  padding: 18px;
+}
+#publications .publication-list > .publication-item .upgrade-insights {
+  margin-top: 14px;
+  padding-top: 12px;
+}
+
+/* Contact now shares the exact gradient of the slideshow captions and
+   the highlighted New Publication heading. */
+#contact .contact-card {
+  background: linear-gradient(115deg, #edc8bf, #e9afbe);
+  color: var(--ink);
+}
+
+@media (max-width: 760px) {
+  main > section.section-pad[id]:not(#home) {
+    scroll-margin-top: 78px;
+    padding-top: 28px;
+    padding-bottom: 52px;
+  }
+  main > section.section-pad[id]:not(#home) > .section-heading h2 {
+    font-size: clamp(28px, 6vw, 37px);
+  }
+  #publications .publication-list > .publication-item {
+    padding: 16px;
+  }
 }
