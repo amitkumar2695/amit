@@ -319,3 +319,58 @@
     grid-row: 3;
   }
 }
+
+
+/* Featured New Publication only: keep the three columns, but size visuals to
+   their media instead of stretching them to the height of neighboring cards.
+   This removes the large empty areas above/below the graphical abstract and GIF. */
+.snapshot > .upgrade-latest-news .upgrade-news-layout {
+  align-items: start;
+}
+
+.snapshot > .upgrade-latest-news .upgrade-news-layout > .upgrade-media-card {
+  height: auto;
+  align-self: start;
+}
+
+.snapshot > .upgrade-latest-news .upgrade-news-center {
+  display: block;
+  min-height: 0;
+  height: auto;
+}
+
+.snapshot > .upgrade-latest-news .upgrade-news-layout .upgrade-graphic-card .upgrade-image-link {
+  flex: none;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 6 / 5;
+}
+
+.snapshot > .upgrade-latest-news .upgrade-news-layout .upgrade-graphic-card .upgrade-news-image {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  object-fit: contain;
+}
+
+.snapshot > .upgrade-latest-news .upgrade-news-layout .upgrade-gif-stage {
+  flex: none;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+}
+
+.snapshot > .upgrade-latest-news .upgrade-news-layout .upgrade-gif-stage img {
+  padding: 0;
+  object-fit: contain;
+}
+
+/* On smaller screens maintain existing column order and avoid fixed media heights. */
+@media (max-width: 1090px) {
+  .snapshot > .upgrade-latest-news .upgrade-news-center {
+    display: block;
+    min-height: 0;
+  }
+}
