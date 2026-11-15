@@ -219,9 +219,9 @@
     function water(t) {
       ctx.clearRect(0,0,state.w,state.h);
       const gradient = ctx.createLinearGradient(0,0,state.w,state.h);
-      gradient.addColorStop(0,"rgba(220,244,235,.84)");
-      gradient.addColorStop(.55,"rgba(219,245,238,.75)");
-      gradient.addColorStop(1,"rgba(143,211,213,.68)");
+      gradient.addColorStop(0,"#2f4454");
+      gradient.addColorStop(.55,"#1c3334");
+      gradient.addColorStop(1,"#376e6f");
       ctx.fillStyle=gradient; ctx.fillRect(0,0,state.w,state.h);
       ctx.lineWidth=1.1;
       for(let y=-10;y<state.h+30;y+=33){
@@ -231,11 +231,11 @@
           const yy=y+Math.sin(x*.018+phase)*6+Math.sin(x*.04-phase*.8)*2;
           if(x===-10) ctx.moveTo(x,yy); else ctx.lineTo(x,yy);
         }
-        ctx.strokeStyle="rgba(8,104,130,.11)"; ctx.stroke();
+        ctx.strokeStyle="rgba(198,212,214,.13)"; ctx.stroke();
       }
       state.ripples.forEach(r=>{
         ctx.beginPath(); ctx.ellipse(r.x,r.y,r.r*1.25,r.r*.46,0,0,Math.PI*2);
-        ctx.strokeStyle="rgba(8,107,128,"+r.a+")"; ctx.stroke();
+        ctx.strokeStyle="rgba(218,123,147,"+r.a+")"; ctx.stroke();
       });
     }
     function draw(t) { water(t); }
