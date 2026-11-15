@@ -76,7 +76,9 @@
     preview.alt = "Illustrative animated preview of the existing graphical abstract";
     preview.loading = "lazy";
     stage.append(preview);
-    const status = node("p", "upgrade-media-status", "Animated graphical abstract preview");
+    // Keep one visible Research GIF heading; expose GIF state through accessibility instead.
+    stage.setAttribute("role", "group");
+    stage.setAttribute("aria-label", "Research GIF");
     const gifSrc = gifPath(poster);
     const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (gifSrc && !reducedMotion) {
@@ -89,18 +91,18 @@
       gif.addEventListener("load", () => {
         gif.classList.add("is-ready");
         preview.hidden = true;
-        status.textContent = "Research GIF";
+        stage.setAttribute("aria-label", "Research GIF playing");
       }, {once:true});
       gif.addEventListener("error", () => {
         gif.remove();
-        status.textContent = "Research GIF could not load — showing animated graphical abstract preview";
+        stage.setAttribute("aria-label", "Research GIF unavailable; showing graphical abstract preview");
       }, {once:true});
       gif.src = gifSrc;
       stage.append(gif);
     } else if (reducedMotion) {
-      status.textContent = "Static preview (reduced-motion setting)";
+      stage.setAttribute("aria-label", "Static research preview (reduced motion)");
     }
-    card.append(stage, status);
+    card.append(stage);
     return card;
   }
   function enhancePublications() {
@@ -147,7 +149,7 @@
     if (!title) return;
 
     // Editorial feature layout: header across the card, followed by
-    // graphical abstract | stacked research impact + keywords | GIF.
+    // graphical abstract | research impact | GIF.
     const article = node("article", "publication-item upgrade-latest-news");
     article.setAttribute("aria-label", "Latest published research: dual-responsive biofilm-disrupting actuator");
 
@@ -166,12 +168,9 @@
     const impact = node("section", "upgrade-news-detail upgrade-news-impact");
     impact.append(node("h4", "upgrade-subhead", "Key research impact"));
     impact.append(node("p", "upgrade-impact", research.impact));
-    const keywords = node("section", "upgrade-news-detail upgrade-news-keywords");
-    keywords.append(node("h4", "upgrade-subhead", "Keywords"));
-    const chips = node("div", "upgrade-chips");
-    research.keywords.forEach(keyword => chips.append(node("span", "upgrade-chip", keyword)));
-    keywords.append(chips);
-    center.append(impact, keywords);
+    // The separate Keywords panel is omitted from the featured news card.
+    // Other publication entries retain their own research-impact keywords.
+    center.append(impact);
 
     const visualRow = node("div", "upgrade-news-layout");
     visualRow.append(
