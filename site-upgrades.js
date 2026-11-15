@@ -86,7 +86,7 @@
       gif.alt = label || "Research animation for this publication";
       // Loading while display:none can deadlock lazy-loaded images:
       // the CSS keeps this image in layout (transparent) until its load event.
-      gif.loading = "eager";
+      gif.loading = "lazy";
       gif.decoding = "async";
       gif.addEventListener("load", () => {
         gif.classList.add("is-ready");
@@ -97,8 +97,20 @@
         gif.remove();
         stage.setAttribute("aria-label", "Research GIF unavailable; showing graphical abstract preview");
       }, {once:true});
-      gif.src = gifSrc;
       stage.append(gif);
+      // Defer off-screen GIF traffic until the featured news panel nears view.
+      const beginGifLoad = () => { gif.src = gifSrc; };
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(entries => {
+          if (entries.some(entry => entry.isIntersecting)) {
+            observer.disconnect();
+            beginGifLoad();
+          }
+        }, { rootMargin: "400px 0px" });
+        observer.observe(stage);
+      } else {
+        beginGifLoad();
+      }
     } else if (reducedMotion) {
       stage.setAttribute("aria-label", "Static research preview (reduced motion)");
     }
@@ -202,14 +214,15 @@
     hero.insertBefore(layer, hero.firstChild);
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
-    const state = {w:0,h:0,ripples:[],last:0,paused:false,visible:true};
+    const state = {w:0,h:0,ripples:[],last:0,lastFrame:0,paused:false,visible:true};
     let raf = 0;
     const clamp = (v,low,high) => Math.min(high,Math.max(low,v));
     function resize() {
       const bounds = hero.getBoundingClientRect();
       state.w = Math.max(1,bounds.width);
       state.h = Math.max(1,bounds.height);
-      const dpr = Math.min(devicePixelRatio || 1,1.75);
+      // Limit raster pixel count on high-resolution displays.
+      const dpr = Math.min(devicePixelRatio || 1,1.3);
       canvas.width = Math.round(state.w * dpr);
       canvas.height = Math.round(state.h * dpr);
       ctx.setTransform(dpr,0,0,dpr,0,0);
@@ -247,12 +260,16 @@
     function draw(t) { water(t); }
     function tick(t) {
       if (state.paused || reduce.matches || touchOnly.matches || !state.visible || document.hidden) {raf=0;return;}
+      raf=requestAnimationFrame(tick);
+      // Draw at ~30 FPS rather than on every high-refresh display frame.
+      if(t-state.lastFrame<33) return;
+      state.lastFrame=t;
       const dt=clamp((t-(state.last||t))/16.67,.4,2.5);state.last=t;
       state.ripples=state.ripples.filter(r=>(r.a-=.006*dt)>0 && (r.r+=.44*dt)>0);
-      draw(t);raf=requestAnimationFrame(tick);
+      draw(t);
     }
     function start() {
-      cancelAnimationFrame(raf);state.last=0;
+      cancelAnimationFrame(raf);state.last=0;state.lastFrame=0;
       if(!state.paused && !reduce.matches && !touchOnly.matches && state.visible && !document.hidden)raf=requestAnimationFrame(tick);
       else draw(performance.now());
     }
