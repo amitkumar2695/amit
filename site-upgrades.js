@@ -220,8 +220,8 @@
       ctx.clearRect(0,0,state.w,state.h);
       const gradient = ctx.createLinearGradient(0,0,state.w,state.h);
       gradient.addColorStop(0,"#2f4454");
-      gradient.addColorStop(.55,"#1c3334");
-      gradient.addColorStop(1,"#376e6f");
+      gradient.addColorStop(.7,"#2f4454");
+      gradient.addColorStop(1,"#2e151b");
       ctx.fillStyle=gradient; ctx.fillRect(0,0,state.w,state.h);
       ctx.lineWidth=1.1;
       for(let y=-10;y<state.h+30;y+=33){
