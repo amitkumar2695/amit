@@ -1,0 +1,34 @@
+/* Full-width research showcase; diagrams stay uncropped and legible. */
+.research-showcase { position: relative; width: 100%; background: #fff; isolation: isolate; }
+.research-slides { height: clamp(380px, 38vw, 510px); }
+.research-slide { position: relative; height: 100%; margin: 0; background: linear-gradient(120deg, #fff8f5, #f7e6e8); }
+.research-slide[hidden], .research-carousel-controls[hidden] { display: none; }
+.research-slide > img { display: block; width: 100%; height: 100%; object-fit: contain; padding: 20px 80px 146px; }
+.research-slide-caption { position: absolute; inset: auto 0 0; padding: 24px 90px 54px; text-align: center; color: #fff; background: linear-gradient(115deg, #463e6f, #793155); }
+.research-slide-caption h2 { margin: 0; font-size: clamp(24px, 3vw, 40px); line-height: 1.15; letter-spacing: .015em; }
+.research-slide-caption p { margin: 8px 0 0; font-size: 14px; color: #fff8f5; }
+.research-arrow { position: absolute; top: 37%; transform: translateY(-50%); width: 48px; height: 58px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,248,245,.94); color: var(--ink); font: 40px/1 Georgia, serif; cursor: pointer; }
+.research-prev { left: 20px; }
+.research-next { right: 20px; }
+.research-arrow:hover { background: var(--surface-soft); }
+.research-pagination { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); display: flex; }
+.research-pagination button { display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.research-pagination span { width: 8px; height: 8px; border: 1px solid #fff; border-radius: 50%; background: transparent; }
+.research-pagination [aria-current="true"] span { background: #fff; transform: scale(1.25); }
+.research-playback { position: absolute; right: 20px; bottom: 12px; min-height: 32px; padding: 5px 10px; border: 1px solid #edc8bf; border-radius: 6px; background: #463e6f; color: #fff; font: 600 12px/1.4 Inter, sans-serif; cursor: pointer; }
+.research-showcase button:focus-visible { outline: 3px solid #99416b; outline-offset: 3px; box-shadow: 0 0 0 6px #fff; }
+.research-slides { touch-action: pan-y; }
+/* The introduction now follows the visual showcase instead of filling a screen. */
+#home.hero { min-height: auto; }
+@media (max-width: 600px) {
+  .research-slides { height: 420px; }
+  .research-slide > img { padding: 16px 42px 184px; }
+  .research-slide-caption { padding: 20px 20px 82px; }
+  .research-slide-caption h2 { font-size: 24px; }
+  .research-slide-caption p { font-size: 13px; }
+  .research-arrow { width: 36px; height: 48px; top: 28%; }
+  .research-prev { left: 4px; }
+  .research-next { right: 4px; }
+  .research-pagination { bottom: 40px; }
+  .research-playback { right: 50%; transform: translateX(50%); bottom: 7px; }
+}

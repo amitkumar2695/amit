@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="site-upgrades.css">
+  <link rel="stylesheet" href="research-carousel.css">
   <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e91f06e58ba64e488b6b1167abe9aba8"}'></script>
 </head>
 
@@ -41,6 +42,57 @@
   </header>
 
   <main>
+    <section class="research-showcase" aria-label="Research highlights" aria-roledescription="carousel">
+      <div class="research-slides" aria-live="off">
+        <article class="research-slide" role="group" aria-roledescription="slide" aria-label="1 of 5: Biofilm-Disrupting Soft Actuators">
+          <img src="Paper8.png" alt="Graphical abstract showing a dual-responsive actuator disrupting biofilm" fetchpriority="high" decoding="async">
+          <div class="research-slide-caption">
+            <h2>Biofilm-Disrupting Soft Actuators</h2>
+            <p>Dual-responsive actuation for cleaner medical surfaces.</p>
+          </div>
+        </article>
+        <article class="research-slide" hidden role="group" aria-roledescription="slide" aria-label="2 of 5: Programmable 4D Printing">
+          <img src="Paper1.png" alt="Graphical abstract of programmable 4D-printed soft actuators" loading="lazy" decoding="async">
+          <div class="research-slide-caption">
+            <h2>Programmable 4D Printing</h2>
+            <p>Designing shape change through bending strain.</p>
+          </div>
+        </article>
+        <article class="research-slide" hidden role="group" aria-roledescription="slide" aria-label="3 of 5: Responsive Drug Delivery">
+          <img src="Paper2.png" alt="Graphical abstract of pH-responsive bilayers for multidrug release" loading="lazy" decoding="async">
+          <div class="research-slide-caption">
+            <h2>Responsive Drug Delivery</h2>
+            <p>pH-triggered bilayers for controlled molecular release.</p>
+          </div>
+        </article>
+        <article class="research-slide" hidden role="group" aria-roledescription="slide" aria-label="4 of 5: Antifouling Biomaterials">
+          <img src="Paper4.png" alt="Graphical abstract of superhydrophobic pH-responsive soft actuators" loading="lazy" decoding="async">
+          <div class="research-slide-caption">
+            <h2>Antifouling Biomaterials</h2>
+            <p>Superhydrophobic surfaces meet responsive soft materials.</p>
+          </div>
+        </article>
+        <article class="research-slide" hidden role="group" aria-roledescription="slide" aria-label="5 of 5: Shape-Morphing Hydrogels">
+          <img src="Paper6.png" alt="Graphical abstract of solvent-triggered shape changes in printed hydrogels" loading="lazy" decoding="async">
+          <div class="research-slide-caption">
+            <h2>Shape-Morphing Hydrogels</h2>
+            <p>Turning environmental stimuli into material movement.</p>
+          </div>
+        </article>
+      </div>
+      <div class="research-carousel-controls" hidden>
+        <button class="research-arrow research-prev" type="button" aria-label="Previous research slide">&#8249;</button>
+        <button class="research-arrow research-next" type="button" aria-label="Next research slide">&#8250;</button>
+        <div class="research-pagination" role="group" aria-label="Choose a research slide">
+          <button type="button" aria-label="Show slide 1: Biofilm-Disrupting Soft Actuators" aria-current="true"><span></span></button>
+          <button type="button" aria-label="Show slide 2: Programmable 4D Printing" aria-current="false"><span></span></button>
+          <button type="button" aria-label="Show slide 3: Responsive Drug Delivery" aria-current="false"><span></span></button>
+          <button type="button" aria-label="Show slide 4: Antifouling Biomaterials" aria-current="false"><span></span></button>
+          <button type="button" aria-label="Show slide 5: Shape-Morphing Hydrogels" aria-current="false"><span></span></button>
+        </div>
+        <button class="research-playback" type="button">Pause slideshow</button>
+      </div>
+    </section>
     <section id="home" class="hero section-pad">
       <div class="hero-grid">
         <div class="hero-copy reveal">
@@ -478,5 +530,6 @@ theme ”Can soft machines achieve true autonomy by dynamically adapting to envi
 
   <script src="script.js"></script>
   <script defer src="site-upgrades.js"></script>
+  <script defer src="research-carousel.js"></script>
 </body>
 </html>
