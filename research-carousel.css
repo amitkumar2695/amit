@@ -1,86 +1,157 @@
-/* Full-width research showcase; diagrams stay uncropped and legible. */
-.research-showcase { position: relative; width: 100%; background: #fff; isolation: isolate; }
-.research-slides { height: clamp(380px, 38vw, 510px); }
-.research-slide { position: relative; height: 100%; margin: 0; background: linear-gradient(120deg, #fff8f5, #f7e6e8); }
+/* Research showcase follows the Introduction. All slide diagrams stay uncropped.
+   The caption uses the same gradient and type styling as the featured publication. */
+.research-showcase {
+  position: relative;
+  width: 100%;
+  background: var(--surface, #fff);
+  isolation: isolate;
+}
+.research-slides {
+  height: clamp(380px, 38vw, 510px);
+  touch-action: pan-y;
+}
+.research-slide {
+  position: relative;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: linear-gradient(120deg, #fff8f5, #f7e6e8);
+}
 .research-slide[hidden], .research-carousel-controls[hidden] { display: none; }
-.research-slide > img { display: block; width: 100%; height: 100%; object-fit: contain; padding: 20px 80px 146px; }
-.research-slide-caption { position: absolute; inset: auto 0 0; padding: 24px 90px 54px; text-align: center; color: #fff; background: linear-gradient(115deg, #463e6f, #793155); }
-.research-slide-caption h2 { margin: 0; font-size: clamp(24px, 3vw, 40px); line-height: 1.15; letter-spacing: .015em; }
-.research-slide-caption p { margin: 8px 0 0; font-size: 14px; color: #fff8f5; }
-.research-arrow { position: absolute; top: 37%; transform: translateY(-50%); width: 48px; height: 58px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,248,245,.94); color: var(--ink); font: 40px/1 Georgia, serif; cursor: pointer; }
-.research-prev { left: 20px; }
-.research-next { right: 20px; }
+.research-slide > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  padding: 32px 78px 14px;
+}
+.research-slide-caption {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 92px;
+  padding: 12px 110px 14px;
+  background: linear-gradient(115deg, #edc8bf, #e9afbe);
+  color: var(--ink, #463e6f);
+  text-align: center;
+}
+.research-slide-caption h2 {
+  margin: 0;
+  font-size: clamp(20px, 2vw, 27px);
+  font-weight: 700;
+  line-height: 1.26;
+  letter-spacing: 0;
+  color: var(--ink, #463e6f);
+  text-wrap: balance;
+}
+.research-slide-caption p {
+  margin: 4px 0 0;
+  font-size: clamp(13px, 1.1vw, 16px);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--ink, #463e6f);
+}
+.research-arrow {
+  position: absolute;
+  top: calc((100% - 92px) / 2);
+  transform: translateY(-50%);
+  width: 44px;
+  height: 50px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255,248,245,.94);
+  color: var(--ink);
+  font: 36px/1 Georgia, serif;
+  cursor: pointer;
+  z-index: 2;
+}
+.research-prev { left: 16px; }
+.research-next { right: 16px; }
 .research-arrow:hover { background: var(--surface-soft); }
-.research-pagination { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); display: flex; }
-.research-pagination button { display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 0; background: transparent; cursor: pointer; }
-.research-pagination span { width: 8px; height: 8px; border: 1px solid #fff; border-radius: 50%; background: transparent; }
-.research-pagination [aria-current="true"] span { background: #fff; transform: scale(1.25); }
-.research-playback { position: absolute; right: 20px; bottom: 12px; min-height: 32px; padding: 5px 10px; border: 1px solid #edc8bf; border-radius: 6px; background: #463e6f; color: #fff; font: 600 12px/1.4 Inter, sans-serif; cursor: pointer; }
-.research-showcase button:focus-visible { outline: 3px solid #99416b; outline-offset: 3px; box-shadow: 0 0 0 6px #fff; }
-.research-slides { touch-action: pan-y; }
-/* The introduction now follows the visual showcase instead of filling a screen. */
-#home.hero { min-height: auto; }
-@media (max-width: 600px) {
-  .research-slides { height: 420px; }
-  .research-slide > img { padding: 16px 42px 184px; }
-  .research-slide-caption { padding: 20px 20px 82px; }
-  .research-slide-caption h2 { font-size: 24px; }
-  .research-slide-caption p { font-size: 13px; }
-  .research-arrow { width: 36px; height: 48px; top: 28%; }
-  .research-prev { left: 4px; }
-  .research-next { right: 4px; }
-  .research-pagination { bottom: 40px; }
-  .research-playback { right: 50%; transform: translateX(50%); bottom: 7px; }
+.research-pagination {
+  position: absolute;
+  top: 9px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  z-index: 2;
+}
+.research-pagination button {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.research-pagination span {
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--plum, #463e6f);
+  border-radius: 50%;
+  background: rgba(255,255,255,.95);
+}
+.research-pagination [aria-current="true"] span {
+  background: var(--plum, #463e6f);
+  transform: scale(1.25);
+}
+.research-playback {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  min-height: 28px;
+  padding: 5px 10px;
+  border: 1px solid #edc8bf;
+  border-radius: 6px;
+  background: #463e6f;
+  color: #fff;
+  font: 600 12px/1.4 Inter, sans-serif;
+  cursor: pointer;
+  z-index: 2;
+}
+.research-showcase button:focus-visible {
+  outline: 3px solid #99416b;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px #fff;
 }
 
+/* The Introduction is the first section without an extra full-screen height. */
+#home.hero { min-height: auto; }
 
-/* Compact desktop landing layout: the slideshow and introduction share the first viewport.
-   Keep the graphical abstracts uncropped, and place captions beside them to reclaim height. */
+@media (max-width: 600px) {
+  .research-slides { height: 420px; }
+  .research-slide > img { padding: 42px 42px 12px; }
+  .research-slide-caption { min-height: 104px; padding: 10px 18px 14px; }
+  .research-slide-caption h2 { font-size: 21px; }
+  .research-slide-caption p { font-size: 12px; }
+  .research-arrow { top: calc((100% - 104px) / 2); width: 36px; height: 46px; font-size: 30px; }
+  .research-prev { left: 4px; }
+  .research-next { right: 4px; }
+  .research-pagination { top: 5px; left: 42%; }
+  .research-pagination button { width: 24px; height: 30px; }
+  .research-playback { top: 7px; right: 6px; min-height: 26px; font-size: 11px; }
+}
+
+/* Preserve the compact, roomier Introduction layout on desktop. */
 @media (min-width: 981px) {
   .research-slides { height: clamp(265px, 38svh, 335px); }
-
-  .research-slide > img {
-    position: absolute;
-    inset: 0 auto 0 0;
-    width: 57%;
-    height: 100%;
-    object-fit: contain;
-    padding: 16px clamp(38px, 4vw, 76px);
-  }
-
-  .research-slide-caption {
-    inset: 0 0 0 auto;
-    width: 43%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 24px 48px 52px;
-  }
-
-  .research-slide-caption h2 {
-    font-size: clamp(24px, 2.4vw, 34px);
-    line-height: 1.18;
-  }
-
-  .research-slide-caption p {
-    margin-top: 7px;
-    font-size: 14px;
-    line-height: 1.4;
-  }
-
-  .research-arrow {
-    top: 50%;
-    width: 40px;
-    height: 46px;
-    font-size: 32px;
-  }
-
+  .research-slide > img { padding: 32px clamp(44px, 5vw, 90px) 12px; }
+  .research-slide-caption { min-height: 80px; padding: 8px 115px 10px; }
+  .research-slide-caption h2 { font-size: clamp(20px, 2vw, 27px); }
+  .research-slide-caption p { font-size: 13px; }
+  .research-arrow { top: calc((100% - 80px) / 2); width: 40px; height: 46px; font-size: 32px; }
   .research-prev { left: 12px; }
   .research-next { right: 12px; }
-  .research-pagination { left: 72%; bottom: 8px; }
-  .research-playback { right: 14px; bottom: 10px; min-height: 28px; }
-
+  .research-pagination { top: 8px; left: 50%; }
+  .research-playback { top: 10px; right: 14px; }
   #home.hero {
     min-height: 0;
     padding: clamp(24px, 4.5svh, 42px) clamp(18px, 5vw, 64px);
