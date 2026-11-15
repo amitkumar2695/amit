@@ -1,4 +1,4 @@
-/* Portfolio enhancements: intro-only microrobot and publication research highlights.
+/* Portfolio enhancements: intro-only cursor water effect and publication research highlights.
    Only the Latest News article uses a GIF (gifs/Paper8.gif).
    Until supplied, that panel displays a labeled animated graphical-abstract preview. */
 (() => {
@@ -182,9 +182,9 @@
     article.append(header, visualRow);
     title.insertAdjacentElement("afterend", article);
   }
-  // Restore the original animation within the introductory hero only.
+  // Keep the water animation and cursor ripples within the introductory hero only.
   // Pointer coordinates are relative to the hero, not the full viewport.
-  function makeWaterBoat() {
+  function makeWaterEffect() {
     const hero = document.querySelector("#home.hero");
     if (!hero || hero.querySelector(".upgrade-water")) return;
     const reduce = matchMedia("(prefers-reduced-motion: reduce)");
@@ -196,31 +196,25 @@
     hero.insertBefore(layer, hero.firstChild);
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
-    const state = {w:0,h:0,x:0,y:0,tx:0,ty:0,heading:0,wake:[],ripples:[],frame:0,last:0,paused:false,visible:true};
+    const state = {w:0,h:0,ripples:[],last:0,paused:false,visible:true};
     let raf = 0;
     const clamp = (v,low,high) => Math.min(high,Math.max(low,v));
     function resize() {
       const bounds = hero.getBoundingClientRect();
-      const oldW = state.w, oldH = state.h;
       state.w = Math.max(1,bounds.width);
       state.h = Math.max(1,bounds.height);
       const dpr = Math.min(devicePixelRatio || 1,1.75);
       canvas.width = Math.round(state.w * dpr);
       canvas.height = Math.round(state.h * dpr);
       ctx.setTransform(dpr,0,0,dpr,0,0);
-      if (!oldW) { state.x = state.tx = state.w*.67; state.y = state.ty = state.h*.72; }
-      else {
-        state.x *= state.w/oldW; state.tx *= state.w/oldW;
-        state.y *= state.h/oldH; state.ty *= state.h/oldH;
-      }
       draw(performance.now());
     }
     function pointer(event) {
       if (reduce.matches || touchOnly.matches || state.paused) return;
       const bounds = hero.getBoundingClientRect();
-      state.tx = clamp(event.clientX-bounds.left,35,state.w-35);
-      state.ty = clamp(event.clientY-bounds.top,35,state.h-35);
-      if (state.ripples.length < 14) state.ripples.push({x:state.tx,y:state.ty,r:1,a:.24});
+      const x = clamp(event.clientX-bounds.left,0,state.w);
+      const y = clamp(event.clientY-bounds.top,0,state.h);
+      if (state.ripples.length < 14) state.ripples.push({x,y,r:1,a:.24});
     }
     function water(t) {
       ctx.clearRect(0,0,state.w,state.h);
@@ -243,43 +237,11 @@
         ctx.beginPath(); ctx.ellipse(r.x,r.y,r.r*1.25,r.r*.46,0,0,Math.PI*2);
         ctx.strokeStyle="rgba(8,107,128,"+r.a+")"; ctx.stroke();
       });
-      state.wake.forEach(r=>{
-        ctx.beginPath(); ctx.ellipse(r.x,r.y,r.r*1.25,r.r*.56,r.angle,0,Math.PI*2);
-        ctx.fillStyle="rgba(5,103,129,"+r.a+")"; ctx.fill();
-      });
     }
-    function boat(t) {
-      ctx.save();
-      ctx.translate(state.x,state.y+Math.sin(t*.002)*1);
-      ctx.rotate(state.heading+Math.PI/2);
-      ctx.shadowColor="rgba(6,59,72,.24)";ctx.shadowBlur=13;
-      for(const side of [-1,1]) {
-        const x=side*12;
-        ctx.fillStyle="#155669"; ctx.strokeStyle="#eafff9"; ctx.lineWidth=1.6;
-        ctx.beginPath();ctx.moveTo(x,-24);ctx.bezierCurveTo(x+6,-19,x+6,19,x,23);
-        ctx.bezierCurveTo(x-6,19,x-6,-19,x,-24);ctx.closePath();ctx.fill();ctx.stroke();
-        ctx.fillStyle="#a6e4d5";ctx.fillRect(x-2,-9,4,17);
-      }
-      ctx.shadowBlur=0;
-      ctx.fillStyle="#eefcf8";ctx.fillRect(-12,-10,24,6);ctx.fillRect(-12,11,24,6);
-      ctx.fillStyle="#07816f";ctx.beginPath();ctx.roundRect(-6,-14,12,29,5);ctx.fill();
-      ctx.fillStyle="#c3f69d";ctx.beginPath();ctx.arc(0,-8,3.2,0,Math.PI*2);ctx.fill();
-      ctx.fillStyle="#35d9d4";ctx.beginPath();ctx.arc(0,17,3.1,0,Math.PI*2);ctx.fill();
-      ctx.restore();
-    }
-    function draw(t) { water(t);boat(t); }
+    function draw(t) { water(t); }
     function tick(t) {
       if (state.paused || reduce.matches || touchOnly.matches || !state.visible || document.hidden) {raf=0;return;}
       const dt=clamp((t-(state.last||t))/16.67,.4,2.5);state.last=t;
-      const dx=state.tx-state.x,dy=state.ty-state.y,dist=Math.hypot(dx,dy);
-      if(dist>1.5) {
-        const desired=Math.atan2(dy,dx);
-        state.heading+=Math.atan2(Math.sin(desired-state.heading),Math.cos(desired-state.heading))*.13*dt;
-        const v=Math.min(dist,Math.max(1.4,dist*.036)*dt+1.1*dt);
-        state.x+=Math.cos(state.heading)*v;state.y+=Math.sin(state.heading)*v;
-        if(++state.frame%4===0)state.wake.push({x:state.x-Math.cos(state.heading)*24,y:state.y-Math.sin(state.heading)*24,r:1.5,a:.2,angle:state.heading});
-      }
-      state.wake=state.wake.filter(r=>(r.a-=.005*dt)>0 && (r.r+=.15*dt)>0);
       state.ripples=state.ripples.filter(r=>(r.a-=.006*dt)>0 && (r.r+=.44*dt)>0);
       draw(t);raf=requestAnimationFrame(tick);
     }
@@ -305,7 +267,7 @@
     if(reduce.addEventListener)reduce.addEventListener("change",start);
     resize();start();
   }
-  function init(){addLatestNews();enhancePublications();makeWaterBoat();}
+  function init(){addLatestNews();enhancePublications();makeWaterEffect();}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});
   else init();
 })();
