@@ -223,3 +223,54 @@
   .research-arrow { top: calc((100% - 64px) / 2); }
   #home.hero { padding-block: 40px; }
 }
+
+
+/* Horizontal collages: captions are part of the uploaded images, not separate cards.
+   Maintain entire 2048px-wide research figures without cropping. */
+.research-showcase {
+  padding-top: 32px;
+}
+.research-showcase .research-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+.research-showcase .research-slide[hidden] { display: none; }
+.research-showcase .research-figure-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+  cursor: zoom-in;
+}
+.research-showcase .research-figure-link img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  object-fit: contain;
+  padding: 0;
+}
+.research-showcase .research-slide-caption { display: none; }
+.research-showcase .research-pagination {
+  top: 0;
+  left: 50%;
+}
+.research-showcase .research-playback { top: 2px; }
+.research-showcase .research-arrow {
+  top: calc(50% + 16px);
+}
+
+/* Keep wide figure ratios practical at narrow viewport widths. The collage
+   can be opened at full resolution by clicking or tapping it. */
+@media (min-width: 601px) and (max-width: 980px) {
+  .research-showcase .research-slides { height: clamp(215px, 31vw, 330px); }
+}
+@media (max-width: 600px) {
+  .research-showcase .research-slides { height: clamp(135px, 34vw, 210px); }
+  .research-showcase .research-pagination { left: 42%; }
+}
