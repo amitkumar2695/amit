@@ -5,6 +5,29 @@ const publicationItems = document.querySelectorAll(".publication-item");
 const publicationFigures = document.querySelectorAll(".pub-figure img");
 const revealItems = document.querySelectorAll(".reveal");
 const year = document.querySelector("#year");
+const brandLink = document.querySelector(".site-header .brand");
+
+// Return to the very top when the visitor clicks the name/logo.
+// Native #home navigation otherwise puts the Introduction behind the sticky header.
+if (brandLink) {
+  brandLink.addEventListener("click", (event) => {
+    if (
+      event.defaultPrevented || event.button !== 0 ||
+      event.metaKey || event.ctrlKey || event.shiftKey || event.altKey
+    ) return;
+
+    event.preventDefault();
+    document.body.classList.remove("nav-open");
+    if (navToggle) navToggle.setAttribute("aria-expanded", "false");
+
+    if (window.location.hash !== "#home") {
+      window.history.pushState(null, "", "#home");
+    }
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
+  });
+}
 
 if (year) {
   year.textContent = new Date().getFullYear();
