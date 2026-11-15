@@ -829,14 +829,13 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 }
 ::selection { background: var(--accent); color: var(--on-accent); }
 
-/* Justify long-form copy while preserving compact labels and controls. */
+/* Readable, natural line breaks: left-aligned copy without automatic hyphenation. */
 main .section-pad :is(h1, h2, h3),
 main .section-pad p:not(.eyebrow):not(.tag):not(.year):not(.upgrade-citation):not(.upgrade-media-status) {
-  text-align: justify;
-  text-align-last: auto;
-  text-justify: inter-word;
-  overflow-wrap: break-word;
-  hyphens: auto;
+  text-align: left;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
 }
 /* Short profile details remain grouped around the portrait. */
 main .hero-card :is(h2, p) { text-align: center; }
