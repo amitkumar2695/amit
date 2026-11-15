@@ -829,17 +829,11 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 }
 ::selection { background: var(--accent); color: var(--on-accent); }
 
-/* Justify long-form copy while preserving compact labels and controls. */
-main .section-pad :is(h1, h2, h3),
-main .section-pad p:not(.eyebrow):not(.tag):not(.year):not(.upgrade-citation):not(.upgrade-media-status) {
-  text-align: justify;
-  text-align-last: auto;
-  text-justify: inter-word;
-  overflow-wrap: break-word;
-  hyphens: auto;
-}
-/* Short profile details remain grouped around the portrait. */
-main .hero-card :is(h2, p) { text-align: center; }
+/* Match the reference portfolio's natural typography:
+   body text aligns left, section-heading text stays centered,
+   and profile details use their normal text alignment.
+   Break exceptionally long strings only when needed, without inserting hyphens. */
+body { overflow-wrap: break-word; }
 
 /* Center incomplete rows at the same card width as complete rows. */
 .snapshot-grid,
