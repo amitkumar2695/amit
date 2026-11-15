@@ -26,6 +26,11 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Keep the Introduction visible when navigating to #home under the sticky header. */
+#home {
+  scroll-margin-top: 88px;
+}
+
 body {
   margin: 0;
   font-family: "Inter", "Segoe UI", Arial, sans-serif;
