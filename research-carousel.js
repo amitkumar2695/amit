@@ -7,14 +7,21 @@
   const dots = [...root.querySelectorAll('.research-pagination button')];
   const playback = root.querySelector('.research-playback');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  let index = 0, timer = 0, playing = !reduced.matches, hovering = false, visible = true;
+  // Keep the first slide fixed for fast initial paint and stable LCP; visitors
+  // can start automatic rotation using the existing Play slideshow control.
+  let index = 0, timer = 0, playing = false, hovering = false, visible = true;
   let touchStart = null;
   function schedule() {
     clearTimeout(timer);
     const active = playing && !hovering && visible && !document.hidden;
     track.setAttribute('aria-live', active ? 'off' : 'polite');
     playback.textContent = playing ? 'Pause slideshow' : 'Play slideshow';
-    if (active) timer = setTimeout(() => show(index + 1), 6000);
+    if (active) {
+      // Start downloading only the next slide after the visitor presses Play.
+      const nextImage = slides[(index + 1) % slides.length].querySelector('img');
+      if (nextImage && nextImage.loading === 'lazy') nextImage.loading = 'eager';
+      timer = setTimeout(() => show(index + 1), 6000);
+    }
   }
   function show(next) {
     index = (next + slides.length) % slides.length;
