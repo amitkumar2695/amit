@@ -7,7 +7,7 @@
   isolation: isolate;
 }
 .research-slides {
-  height: clamp(380px, 38vw, 510px);
+  height: clamp(400px, 40vw, 530px);
   touch-action: pan-y;
 }
 .research-slide {
@@ -35,8 +35,8 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 44px;
-  padding: 7px 18px;
+  min-height: 54px;
+  padding: 9px 20px;
   background: linear-gradient(115deg, #edc8bf, #e9afbe);
   color: var(--ink, #463e6f);
   text-align: center;
@@ -53,7 +53,7 @@
 .research-slide-description { font-weight: 500; }
 .research-arrow {
   position: absolute;
-  top: calc((100% - 44px) / 2);
+  top: calc((100% - 54px) / 2);
   transform: translateY(-50%);
   width: 44px;
   height: 50px;
@@ -121,11 +121,11 @@
 #home.hero { min-height: auto; }
 
 @media (max-width: 600px) {
-  .research-slides { height: 420px; }
+  .research-slides { height: 440px; }
   .research-slide > img { padding: 42px 42px 12px; }
-  .research-slide-caption { min-height: 64px; padding: 7px 12px; }
+  .research-slide-caption { min-height: 74px; padding: 9px 12px; }
   .research-slide-caption h2 { font-size: 13px; line-height: 1.35; white-space: normal; }
-  .research-arrow { top: calc((100% - 64px) / 2); width: 36px; height: 46px; font-size: 30px; }
+  .research-arrow { top: calc((100% - 74px) / 2); width: 36px; height: 46px; font-size: 30px; }
   .research-prev { left: 4px; }
   .research-next { right: 4px; }
   .research-pagination { top: 5px; left: 42%; }
@@ -135,18 +135,18 @@
 
 /* Preserve the compact, roomier Introduction layout on desktop. */
 @media (min-width: 981px) {
-  .research-slides { height: clamp(265px, 38svh, 335px); }
+  .research-slides { height: clamp(295px, 40svh, 370px); }
   .research-slide > img { padding: 32px clamp(44px, 5vw, 90px) 12px; }
-  .research-slide-caption { min-height: 44px; padding: 7px 18px; }
+  .research-slide-caption { min-height: 54px; padding: 9px 20px; }
   .research-slide-caption h2 { font-size: clamp(13px, 1.3vw, 18px); white-space: nowrap; }
-  .research-arrow { top: calc((100% - 44px) / 2); width: 40px; height: 46px; font-size: 32px; }
+  .research-arrow { top: calc((100% - 54px) / 2); width: 40px; height: 46px; font-size: 32px; }
   .research-prev { left: 12px; }
   .research-next { right: 12px; }
   .research-pagination { top: 8px; left: 50%; }
   .research-playback { top: 10px; right: 14px; }
   #home.hero {
-    min-height: clamp(265px, 38svh, 335px);
-    padding: clamp(12px, 2svh, 22px) clamp(18px, 5vw, 64px);
+    min-height: clamp(295px, 40svh, 370px);
+    padding: clamp(18px, 2.6svh, 30px) clamp(18px, 5vw, 64px);
   }
 
   #home .hero-grid {
@@ -155,25 +155,25 @@
     gap: clamp(28px, 4.3vw, 64px);
   }
 
-  #home .hero-copy { padding: 12px; margin: -12px; }
+  #home .hero-copy { padding: 14px; margin: -14px; }
   #home .eyebrow { margin-bottom: 6px; font-size: 11px; line-height: 1.4; }
-  #home h1 { font-size: clamp(26px, 2.2vw, 33px); line-height: 1.13; }
-  #home .hero-text { margin-top: 10px; font-size: 14px; line-height: 1.45; }
+  #home h1 { font-size: clamp(27px, 2.25vw, 35px); line-height: 1.13; }
+  #home .hero-text { margin-top: 12px; font-size: 14px; line-height: 1.5; }
 
-  #home .hero-actions { margin-top: 12px; gap: 10px; }
+  #home .hero-actions { margin-top: 15px; gap: 10px; }
   #home .btn { min-height: 36px; padding: 7px 12px; font-size: 12px; }
-  #home .profile-links { margin-top: 10px; gap: 6px 12px; }
+  #home .profile-links { margin-top: 12px; gap: 7px 12px; }
   #home .profile-links a { font-size: 12px; }
 
   #home .hero-panel {
     display: grid;
-    grid-template-columns: 140px minmax(0, 1fr);
-    gap: 8px 12px;
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 10px 14px;
     align-items: center;
-    padding: 12px;
+    padding: 14px;
   }
 
-  #home .portrait-wrap { width: 140px; }
+  #home .portrait-wrap { width: 150px; }
   #home .hero-card { padding: 0; }
   #home .hero-card h2 { font-size: 23px; }
   #home .hero-card p { margin: 3px 0; font-size: 12px; line-height: 1.3; }
@@ -184,7 +184,7 @@
     margin-top: 0;
     gap: 7px;
   }
-  #home .metric-strip > div { padding: 7px 5px; }
+  #home .metric-strip > div { padding: 9px 5px; }
   #home .metric-strip strong { font-size: 18px; }
   #home .metric-strip span { font-size: 10px; line-height: 1.3; }
   #home .upgrade-water-toggle { right: 12px; bottom: 1px; padding: 3px 8px; font-size: 10px; }
@@ -192,8 +192,8 @@
 
 /* On shorter laptop viewports, reserve more height for the introduction. */
 @media (min-width: 981px) and (max-height: 700px) {
-  .research-slides { height: 275px; }
-  #home.hero { min-height: 0; padding-block: 12px; }
+  .research-slides { height: 295px; }
+  #home.hero { min-height: 0; padding-block: 16px; }
   #home h1 { font-size: clamp(24px, 2vw, 30px); }
   #home .hero-text { font-size: 14px; }
   #home .portrait-wrap { width: 128px; }
@@ -204,22 +204,22 @@
 
 /* A touch more breathing room on narrow screens, without moving carousel controls. */
 @media (max-width: 600px) {
-  .research-slides { height: 440px; }
-  #home.hero { padding-top: 28px; padding-bottom: 28px; }
+  .research-slides { height: 460px; }
+  #home.hero { padding-top: 36px; padding-bottom: 36px; }
 }
 
 
 /* Tablets have less horizontal space; allow long captions to wrap rather than crop. */
 @media (min-width: 601px) and (max-width: 980px) {
   .research-slide-caption {
-    min-height: 54px;
-    padding: 7px 16px;
+    min-height: 64px;
+    padding: 9px 16px;
   }
   .research-slide-caption h2 {
     font-size: clamp(12px, 1.6vw, 15px);
     white-space: normal;
     line-height: 1.3;
   }
-  .research-arrow { top: calc((100% - 54px) / 2); }
-  #home.hero { padding-block: 32px; }
+  .research-arrow { top: calc((100% - 64px) / 2); }
+  #home.hero { padding-block: 40px; }
 }
