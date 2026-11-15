@@ -374,3 +374,81 @@
     min-height: 0;
   }
 }
+
+
+/* Featured publication: equally tall impact/GIF cards across the first row.
+   The Keywords card occupies the previously unused space beneath both,
+   while the graphical abstract stays in the left column uncropped. */
+@media (min-width: 1091px) {
+  .snapshot > .upgrade-latest-news .upgrade-news-layout {
+    grid-template-areas:
+      "graphic impact gif"
+      "graphic keywords keywords";
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    align-items: stretch;
+  }
+
+  .snapshot > .upgrade-latest-news .upgrade-news-layout > .upgrade-graphic-card {
+    grid-area: graphic;
+    align-self: start;
+  }
+
+  .snapshot > .upgrade-latest-news .upgrade-news-layout > .upgrade-news-center {
+    grid-area: impact;
+    min-height: clamp(280px, 22vw, 330px);
+    height: 100%;
+    align-self: stretch;
+    display: flex;
+  }
+
+  .snapshot > .upgrade-latest-news .upgrade-news-center > .upgrade-news-impact {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .snapshot > .upgrade-latest-news .upgrade-news-layout > .upgrade-gif-card {
+    grid-area: gif;
+    min-height: clamp(280px, 22vw, 330px);
+    height: 100%;
+    align-self: stretch;
+  }
+
+  .snapshot > .upgrade-latest-news .upgrade-news-layout .upgrade-gif-card > .upgrade-gif-stage {
+    flex: 1;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: auto;
+  }
+
+  .snapshot > .upgrade-latest-news .upgrade-news-layout > .upgrade-news-keywords {
+    grid-area: keywords;
+    align-self: start;
+  }
+}
+
+/* Reuse existing keyword chips, keeping the bottom panel compact. */
+.snapshot > .upgrade-latest-news .upgrade-news-layout > .upgrade-news-keywords {
+  min-width: 0;
+  padding: clamp(12px, 1.2vw, 17px);
+}
+.snapshot > .upgrade-latest-news .upgrade-news-keywords .upgrade-subhead {
+  margin-bottom: 9px !important;
+}
+.snapshot > .upgrade-latest-news .upgrade-news-keywords .upgrade-chips {
+  gap: 8px;
+}
+
+/* Retain the existing stacked layout on tablet and mobile screens. */
+@media (max-width: 1090px) {
+  .snapshot > .upgrade-latest-news .upgrade-news-layout > .upgrade-news-keywords {
+    grid-column: 1 / -1;
+    grid-row: 3;
+  }
+}
+@media (max-width: 670px) {
+  .snapshot > .upgrade-latest-news .upgrade-news-layout > .upgrade-news-keywords {
+    grid-column: 1;
+    grid-row: 4;
+  }
+}
