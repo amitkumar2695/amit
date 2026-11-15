@@ -943,3 +943,42 @@ main > section.section-pad[id]:not(#home) > .section-heading h2 {
     padding: 16px;
   }
 }
+
+/* A full-height final panel allows Contact to align below the sticky header,
+   rather than stopping early and exposing the preceding conference/service cards. */
+#contact.contact {
+  min-height: calc(100svh - 80px);
+  display: grid;
+  align-items: center;
+}
+#contact .contact-card { width: 100%; }
+
+/* Eight section links: conserve navigation space at intermediate desktop widths. */
+@media (min-width: 981px) and (max-width: 1180px) {
+  .site-header { gap: 12px; padding-inline: 20px; }
+  .brand small { display: none; }
+  .site-nav { gap: 2px; }
+  .site-nav a { padding: 8px 7px; font-size: 12px; }
+}
+/* On tablets, collapse the expanded navigation into the existing menu. */
+@media (min-width: 761px) and (max-width: 980px) {
+  .nav-toggle { display: block; flex: 0 0 42px; }
+  .site-nav {
+    position: fixed;
+    inset: 72px 14px auto;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+  body.nav-open .site-nav { display: flex; }
+  .site-nav a { border-radius: 8px; padding: 13px; }
+  .site-header { padding-inline: 20px; }
+}
+@media (max-width: 760px) {
+  #contact.contact { min-height: calc(100svh - 72px); }
+}
