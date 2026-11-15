@@ -32,3 +32,109 @@
   .research-pagination { bottom: 40px; }
   .research-playback { right: 50%; transform: translateX(50%); bottom: 7px; }
 }
+
+
+/* Compact desktop landing layout: the slideshow and introduction share the first viewport.
+   Keep the graphical abstracts uncropped, and place captions beside them to reclaim height. */
+@media (min-width: 981px) {
+  .research-slides { height: clamp(230px, 34svh, 295px); }
+
+  .research-slide > img {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 56%;
+    height: 100%;
+    object-fit: contain;
+    padding: 12px clamp(38px, 4vw, 72px);
+  }
+
+  .research-slide-caption {
+    inset: 0 0 0 auto;
+    width: 44%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 50px 48px;
+  }
+
+  .research-slide-caption h2 {
+    font-size: clamp(22px, 2.25vw, 32px);
+    line-height: 1.18;
+  }
+
+  .research-slide-caption p {
+    margin-top: 7px;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .research-arrow {
+    top: 50%;
+    width: 40px;
+    height: 46px;
+    font-size: 32px;
+  }
+
+  .research-prev { left: 12px; }
+  .research-next { right: 12px; }
+  .research-pagination { left: 72%; bottom: 8px; }
+  .research-playback { right: 14px; bottom: 10px; min-height: 28px; }
+
+  #home.hero {
+    min-height: 0;
+    padding: clamp(16px, 3.2svh, 30px) clamp(18px, 5vw, 64px);
+  }
+
+  #home .hero-grid {
+    max-width: 1340px;
+    grid-template-columns: minmax(0, 1.15fr) minmax(320px, .85fr);
+    gap: clamp(24px, 4vw, 56px);
+  }
+
+  #home .hero-copy { padding: 12px; margin: -12px; }
+  #home .eyebrow { margin-bottom: 7px; font-size: 11px; line-height: 1.4; }
+  #home h1 { font-size: clamp(27px, 2.35vw, 36px); line-height: 1.13; }
+  #home .hero-text { margin-top: 11px; font-size: 15px; line-height: 1.5; }
+
+  #home .hero-actions { margin-top: 15px; gap: 10px; }
+  #home .btn { min-height: 38px; padding: 8px 13px; font-size: 13px; }
+  #home .profile-links { margin-top: 12px; gap: 7px 14px; }
+  #home .profile-links a { font-size: 12px; }
+
+  #home .hero-panel {
+    display: grid;
+    grid-template-columns: 142px minmax(0, 1fr);
+    gap: 10px 14px;
+    align-items: center;
+    padding: 13px;
+  }
+
+  #home .portrait-wrap { width: 142px; }
+  #home .hero-card { padding: 0; }
+  #home .hero-card h2 { font-size: 24px; }
+  #home .hero-card p { margin: 4px 0; font-size: 12px; line-height: 1.3; }
+  #home .metric-strip {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: 0;
+    gap: 7px;
+  }
+  #home .metric-strip > div { padding: 8px 5px; }
+  #home .metric-strip strong { font-size: 19px; }
+  #home .metric-strip span { font-size: 10px; line-height: 1.3; }
+  #home .upgrade-water-toggle { right: 12px; bottom: 1px; padding: 3px 8px; font-size: 10px; }
+}
+
+/* On shorter laptop viewports, reserve more height for the introduction. */
+@media (min-width: 981px) and (max-height: 700px) {
+  .research-slides { height: 215px; }
+  #home.hero { padding-block: 12px; }
+  #home h1 { font-size: clamp(26px, 2vw, 32px); }
+  #home .hero-text { font-size: 14px; }
+  #home .portrait-wrap { width: 122px; }
+  #home .hero-panel { grid-template-columns: 122px minmax(0, 1fr); }
+}
+
+/* Preserve the readable stacked layout on tablet and mobile screens. */
