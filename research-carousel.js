@@ -7,9 +7,9 @@
   const dots = [...root.querySelectorAll('.research-pagination button')];
   const playback = root.querySelector('.research-playback');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  // Keep first image fixed during page load. Visitors can start 6-second
-  // automatic slide rotation using the existing Play slideshow button.
-  let index = 0, timer = 0, playing = false, hovering = false, visible = true;
+  // Automatically rotate the five PNG slides every six seconds.
+  // Respect reduced-motion preferences and retain the Pause/Play control.
+  let index = 0, timer = 0, playing = !reduced.matches, hovering = false, visible = true;
   let touchStart = null;
 
   function schedule() {
@@ -33,7 +33,7 @@
   }
 
   function manual(next) {
-    playing = false;
+    // Move immediately; if autoplay is running, restart its six-second timer.
     show(next);
   }
 
@@ -53,7 +53,8 @@
     }
   });
   root.addEventListener('focusin', event => {
-    if (event.target !== playback) {
+    // Pause autoplay for keyboard focus without stopping it on a mouse click.
+    if (event.target !== playback && event.target.matches(':focus-visible')) {
       playing = false;
       schedule();
     }
