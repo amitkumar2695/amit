@@ -101,6 +101,8 @@
   dots.forEach((dot, i) => dot.addEventListener('click', () => manual(i)));
   playback.addEventListener('click', () => {
     playing = !playing;
+    // A click on Play must start immediately even when the pointer is inside the carousel.
+    if (playing) hovering = false;
     schedule();
   });
 
