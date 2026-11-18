@@ -7,20 +7,24 @@
   const dots = [...root.querySelectorAll('.research-pagination button')];
   const playback = root.querySelector('.research-playback');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  // Automatically rotate the five PNG slides every six seconds.
+  // Automatically rotate the five WebP slides every six seconds.
   // Respect reduced-motion preferences and retain the Pause/Play control.
-  let index = 0, timer = 0, playing = !reduced.matches, hovering = false, visible = true;
+  let index = 0, timer = 0, preloadTimer = 0, playing = !reduced.matches, hovering = false, visible = true;
   let touchStart = null;
 
   function schedule() {
     clearTimeout(timer);
+    clearTimeout(preloadTimer);
     const active = playing && !hovering && visible && !document.hidden;
     track.setAttribute('aria-live', active ? 'off' : 'polite');
     playback.textContent = playing ? 'Pause slideshow' : 'Play slideshow';
     if (active) {
-      // Preload just the next image once automatic playback is enabled.
+      // Delay the next image's download until shortly before it is shown, so
+      // it does not compete with the first slide during initial page paint.
       const nextImage = slides[(index + 1) % slides.length].querySelector('img');
-      if (nextImage && nextImage.loading === 'lazy') nextImage.loading = 'eager';
+      preloadTimer = setTimeout(() => {
+        if (nextImage && nextImage.loading === 'lazy') nextImage.loading = 'eager';
+      }, 3500);
       timer = setTimeout(() => show(index + 1), 6000);
     }
   }
