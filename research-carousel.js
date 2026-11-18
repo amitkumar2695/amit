@@ -33,7 +33,7 @@
   }
 
   function manual(next) {
-    playing = false;
+    // Move immediately; if autoplay is running, restart its six-second timer.
     show(next);
   }
 
@@ -53,7 +53,8 @@
     }
   });
   root.addEventListener('focusin', event => {
-    if (event.target !== playback) {
+    // Pause autoplay for keyboard focus without stopping it on a mouse click.
+    if (event.target !== playback && event.target.matches(':focus-visible')) {
       playing = false;
       schedule();
     }
