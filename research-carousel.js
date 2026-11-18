@@ -9,8 +9,8 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const videos = [...track.querySelectorAll('video')];
 
-  // The first PNG loads immediately; automatic rotation begins only on Play.
-  // Videos use their native controls when a visitor selects a slide manually.
+  // The first PNG loads immediately; automatic slide rotation begins only on Play.
+  // Selecting a video slide starts that video immediately, even in manual mode.
   let index = 0, timer = 0, playing = false, hovering = false, visible = true;
   let touchStart = null;
   let autoplayVideo = null;
@@ -23,6 +23,22 @@
     if (autoplayVideo) {
       autoplayVideo.pause();
       autoplayVideo = null;
+    }
+  }
+
+  function startSelectedVideo() {
+    const video = activeVideo();
+    if (!video || document.hidden) return;
+    // Muted inline playback is supported by standard browser autoplay policies.
+    // Load the selected MP4 immediately instead of waiting for Play slideshow.
+    video.muted = true;
+    video.playsInline = true;
+    video.preload = 'auto';
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {
+        // The native Play control remains available if a browser blocks playback.
+      });
     }
   }
 
@@ -77,6 +93,9 @@
     slides.forEach((slide, i) => { slide.hidden = i !== index; });
     dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === index)));
     schedule();
+    // Next/Previous arrows, dots and swipes always play the selected MP4.
+    // Keep the carousel itself paused unless the visitor selected Play slideshow.
+    if (!playing) startSelectedVideo();
   }
 
   function manual(next) {
